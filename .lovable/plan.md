@@ -1,18 +1,35 @@
 ## Objetivo
-Aumentar o tamanho do container do dock flutuante para que o ícone do Instagram (ampliado) não fique cortado.
+Adaptar a página inicial (`/`) do site atual (Wediet) para a nova marca **Sexando**, trocando apenas textos, mantendo o layout, estrutura e componentes existentes.
 
-## Mudanças
+## Escopo
+- Homepage (`src/pages/Index.tsx`) e seus componentes filhos diretos: `Navbar`, `Hero`, `AnimatedMarqueeHero`, `Footer`.
+- Fora de escopo: outras rotas (`/inicio`, `/funcionalidades`, `/precos`, `/contato`, `/obrigado`, `/mobileapp`), backend, autenticação, banco de dados.
 
-**`src/components/ui/glass-dock.tsx`**
-- Aumentar a célula de cada ícone de `w-11 h-11` para `w-14 h-14` (linha ~92), dando mais espaço interno.
-- Aumentar o gap entre ícones de `gap-1.5` para `gap-2` para acomodar ícones maiores sem encostar.
-- Manter o `overflow-hidden` do wrapper, mas garantir que o padding do dock (`p-2`) seja suficiente — se necessário, ajustar para `p-2.5`.
+## Alterações por componente
 
-**`src/components/FloatingDock.tsx`**
-- Atualizar a constante `DOCK_HEIGHT` (atualmente `68`) para `~84` para refletir a nova altura e manter o ancoramento correto no scroll.
-- Remover o `scale-125` do `InstagramImg` (já não necessário) e usar `w-10 h-10` direto, ficando consistente com os demais ícones que ainda usam `w-6 h-6` — ou manter o Instagram maior proporcionalmente já que agora cabe.
+### 1. Navbar (`src/components/Navbar.tsx`)
+- Trocar logo/alt text de "Wediet" para "Sexando".
+- Trocar label do botão de download de "Baixe Agora" / "Download" para "Entrar" ou "Cadastrar" (placeholder, sem função de backend).
 
-## Resultado
-- Dock fica visualmente maior, com espaço suficiente para o ícone do Instagram aparecer inteiro.
-- Ancoragem no scroll continua correta graças ao `DOCK_HEIGHT` atualizado.
-- Quando o usuário trocar os outros ícones depois, todos terão o mesmo espaço disponível.
+### 2. Hero (`src/components/Hero.tsx`)
+- **Headline:** novo headline sobre "A rede social do estilo de vida liberal".
+- **Subheadline:** descrição curta do Sexando (rede social + comunidade + mídia + lives, desktop e mobile).
+- **CTA primário:** "Criar Conta" (placeholder, sem backend).
+- **CTA secundário:** "Assistir Demo" → manter ou adaptar para "Ver Como Funciona".
+- **Modal:** manter estrutura do modal, trocar título/label para captura de lead ("Cadastre-se para Acesso Antecipado" ou similar).
+
+### 3. AnimatedMarqueeHero (`src/components/AnimatedMarqueeHero.tsx`)
+- Apenas verificar se há alt text ou legendas com marca "Wediet" — trocar para "Sexando" se houver.
+
+### 4. Footer (`src/components/Footer.tsx`)
+- Trocar "Wediet" para "Sexando" em todos os textos visíveis.
+- Atualizar tagline: "Transforme sua alimentação..." → algo relacionado à comunidade/liberdade.
+- Ocultar ou adaptar links de contato específicos do Wediet (email, WhatsApp, endereço) para placeholders genéricos do Sexando.
+
+## Pontos de atenção
+- Manter todos os tokens de design (cores, espaçamentos, tipografia, glassmorphism) do Wediet — a identidade visual nova (roxo/violeta noturno) será aplicada em etapa futura.
+- O botão "Cadastrar/Login" não precisa de funcionalidade real nesta etapa; pode ser um link vazio, `alert()` ou redirecionamento para `#`.
+- Preservar todos os atributos `href`, `to`, `src` de imagens e vídeos — substituir conteúdo visual é etapa futura.
+
+## Entregável
+Página `/` renderizando com textos, headlines, CTAs e marca 100% Sexando, layout e componentes intactos.

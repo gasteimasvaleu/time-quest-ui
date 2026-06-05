@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Heart, Mail, Phone, MapPin } from "lucide-react";
+import { Heart, Mail, MapPin } from "lucide-react";
 import { FloatingDockAnchor } from "@/components/FloatingDock";
 
 const Footer = () => {
@@ -10,13 +10,13 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Brand Section */}
             <div>
-              <h3 className="text-xl font-bold text-primary mb-4">Wediet</h3>
+              <h3 className="text-xl font-bold text-primary mb-4">Sexando</h3>
               <p className="text-muted-foreground mb-4">
-                Transforme sua alimentação com tecnologia de ponta e suporte especializado.
+                A rede social brasileira do estilo de vida liberal. Casais, solteiros(as) e o universo swing — com perfis verificados e total privacidade.
               </p>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Heart className="h-4 w-4 text-red-500 fill-red-500" />
-                <span>Feito com amor para sua saúde</span>
+                <span>Feito para conexões livres e adultas</span>
               </div>
             </div>
 
@@ -44,24 +44,15 @@ const Footer = () => {
               <h3 className="text-lg font-semibold mb-4">Contato</h3>
               <div className="flex flex-col gap-3">
                 <a 
-                  href="mailto:comercial@wediet.app"
+                  href="mailto:contato@sexando.com.br"
                   className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
                 >
                   <Mail className="h-4 w-4" />
-                  <span className="text-sm">comercial@wediet.app</span>
-                </a>
-                <a 
-                  href="https://wa.me/5583999187322"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <Phone className="h-4 w-4" />
-                  <span className="text-sm">(83) 99918-7322</span>
+                  <span className="text-sm">contato@sexando.com.br</span>
                 </a>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <MapPin className="h-4 w-4" />
-                  <span className="text-sm">João Pessoa, Paraíba, Brasil</span>
+                  <span className="text-sm">Brasil</span>
                 </div>
               </div>
             </div>
