@@ -1,121 +1,105 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CircularTestimonials } from "@/components/ui/circular-testimonials";
-
-const PLACEHOLDER = "/placeholder.svg";
+import {
+  LayoutGrid,
+  UserCircle,
+  MessageCircle,
+  Video,
+  Radio,
+  Flame,
+  Search,
+  Users,
+  Bell,
+  ShieldCheck,
+  Settings,
+  Gem,
+} from "lucide-react";
 
 const features = [
   {
-    name: "Identificação por Foto",
-    designation: "📸 Reconhecimento com IA",
+    name: "Feed social",
+    designation: "🏠 Comunidade",
     quote:
-      "Aponte a câmera para qualquer prato e receba a análise nutricional completa em segundos, com mais de 10.000 alimentos reconhecidos.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/0217772788137548fef509893d762bd38fa7b39384b5467e8c597_0.jpeg",
+      "Feeds de Seguindo e Explorar, publicações com fotos e carrosséis, curtidas, comentários, stories com reações e filtros por gênero e estado.",
+    icon: <LayoutGrid />,
   },
   {
-    name: "Scanner de Código de Barras",
-    designation: "📦 +5 milhões de produtos",
+    name: "Perfis ricos",
+    designation: "👤 Sua vitrine",
     quote:
-      "Leia qualquer código de barras e acesse informações nutricionais instantaneamente, com alertas de glúten, lactose e mais.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/image_1775720505935_fd39f837.jpg",
+      "Perfil com fotos, vídeos, bio e localização, abas de publicações e estatísticas, selo de certificação, selo Premium e visitantes do perfil.",
+    icon: <UserCircle />,
   },
   {
-    name: "Assistente no WhatsApp",
-    designation: "💬 Nutricionista 24/7",
+    name: "Mensagens e chat",
+    designation: "💬 Conexões em tempo real",
     quote:
-      "Envie a foto do seu prato pelo WhatsApp e receba uma análise nutricional completa em até 30 segundos, a qualquer hora.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/021779438173307085ce2a5b85bafc715e5d42a46d0455198a983_0.jpeg",
+      "Mensagens privadas 1:1, reações flutuantes, envio de mídias, alerta de segurança anti-golpe e Avatar IA para esquentar o clima.",
+    icon: <MessageCircle />,
   },
   {
-    name: "Diário Alimentar",
-    designation: "📔 Registro automático",
+    name: "Chamadas de áudio e vídeo",
+    designation: "📞 Ao vivo e privado",
     quote:
-      "Suas refeições organizadas por período do dia, com gráficos de evolução e alertas inteligentes de consumo.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/image_1775721012730_1f87c294.png",
+      "Ligações de áudio e vídeo privadas entre membros direto pelo app, com modal de chamada recebida e total discrição.",
+    icon: <Video />,
   },
   {
-    name: "Macros em Tempo Real",
-    designation: "🧮 Dashboard ao vivo",
+    name: "Livecam",
+    designation: "🔴 Transmissões ao vivo",
     quote:
-      "Visualize proteínas, carboidratos e gorduras com metas personalizáveis e alertas quando ultrapassar limites.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/021778139015739a81c77d48bc6ef475723297888da35161e5337_0.jpeg",
+      "Transmissões ao vivo da comunidade com chat em tempo real durante a live e lives recentes destacadas no Explorar.",
+    icon: <Radio />,
   },
   {
-    name: "FitTracker",
-    designation: "💪 +500 exercícios",
+    name: "Hot or Not",
+    designation: "🔥 Recurso Premium",
     quote:
-      "Registre treinos, calcule gasto calórico personalizado e integre com seu smartwatch para acompanhar tudo num só lugar.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/image_1775720564158_e016052b.png",
+      "Poste sua foto, dê notas e veja quem está bombando no ranking da comunidade. Pura adrenalina, liberado no Premium.",
+    icon: <Flame />,
   },
   {
-    name: "Balanço Calórico",
-    designation: "⚖️ Déficit ou superávit",
+    name: "Busca e descoberta",
+    designation: "🔎 Encontre quem importa",
     quote:
-      "Acompanhe seu balanço diário e semanal com sugestões automáticas de ajuste e projeção de quando atingir suas metas.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/0217776278370570fff30dca92d5f275a0fb147aaa6e5732acb92_0.jpeg",
+      "Busca avançada por gênero, cidade, estado, idade e online agora, Top Sexando, perto de você e sugestões de amizade personalizadas.",
+    icon: <Search />,
   },
   {
-    name: "Metas Inteligentes",
-    designation: "🎯 Curto e longo prazo",
+    name: "Amigos e seguidores",
+    designation: "👥 Prova social",
     quote:
-      "Defina objetivos flexíveis que se adaptam ao seu progresso, com notificações motivacionais no momento certo.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/image_1775721449445_8bc55e81.png",
+      "Sistema de seguir, amizades e favoritos, com recomendações públicas escritas por outros membros que reforçam sua reputação.",
+    icon: <Users />,
   },
   {
-    name: "Perfil Completo",
-    designation: "👤 Sua evolução visual",
+    name: "Notificações",
+    designation: "🔔 Nada passa batido",
     quote:
-      "Galeria de antes e depois, avaliações físicas, ficha de treino e uma timeline de todas as suas conquistas.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/image_1779436164408_842711aa.jpg",
+      "Push notifications no navegador e mobile para curtidas, comentários, novos seguidores, mensagens e lives, com central de notificações.",
+    icon: <Bell />,
   },
   {
-    name: "Vídeos Exclusivos",
-    designation: "🎥 Treinos e receitas",
+    name: "Privacidade e segurança",
+    designation: "🔒 No controle",
     quote:
-      "Conteúdo novo toda semana com treinos para todos os níveis, receitas saudáveis e dicas de nutricionistas.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/image_1775721521412_b545a3b4.jpg",
+      "Modo incógnito, bloqueio bidirecional, controle de quem vê suas fotos e perfil, denúncias, verificação +18 e certificação de foto.",
+    icon: <ShieldCheck />,
   },
   {
-    name: "Provador Virtual",
-    designation: "👗 Veja-se com qualquer roupa",
+    name: "Minha conta",
+    designation: "⚙️ Tudo no seu jeito",
     quote:
-      "Envie sua foto e uma peça de roupa, e a IA gera o look pronto. Troque modelos, baixe e compartilhe no WhatsApp.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/02177798148734335338acc098a5d522f02313a829aa5701219f8_0.jpeg",
+      "Edição de perfil, e-mail e senha, preferências de notificação, gestão da assinatura Premium e histórico de login e pagamentos.",
+    icon: <Settings />,
   },
   {
-    name: "Lista de Compras",
-    designation: "🛒 IA organiza pra você",
+    name: "Premium",
+    designation: "💎 Experiência completa",
     quote:
-      "Listas por categoria com estimativa de custo, normalização automática de itens e envio direto no WhatsApp.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/021777981665904bc1c88901295dc331d2b18ca32f912fe1ef818_0.jpeg",
-  },
-  {
-    name: "Faça em Casa",
-    designation: "👨‍🍳 Fast food vira receita",
-    quote:
-      "A IA identifica o prato da foto e entrega a versão caseira completa, com comparativo nutricional e economia.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/image_1776795609253_c584c5d6.png",
-  },
-  {
-    name: "Apple Health",
-    designation: "❤️ iOS sincronizado",
-    quote:
-      "Passos, calorias ativas, peso e treinos do Strava, Garmin e Apple Watch integrados ao seu acompanhamento.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/021777982155611c41b39946b92a3163d51611244fc4a0d1277e0_0.jpeg",
-  },
-  {
-    name: "Banco de Receitas",
-    designation: "📖 Saudáveis e práticas",
-    quote:
-      "Centenas de receitas com macros já calculados, modo de preparo passo a passo e favoritas sempre à mão.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/021777373611838c2670fe791a5f29d61bdea8e0ada6c5d2e7d7c_0.jpeg",
-  },
-  {
-    name: "NutriCoach IA",
-    designation: "💬 Coach pessoal",
-    quote:
-      "Tire dúvidas de nutrição a qualquer hora e receba orientação personalizada baseada no seu histórico.",
-    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/Imagem_IA_v73.png",
+      "Pagamentos via Mercado Pago (Pix e cartão) que desbloqueiam Hot or Not, Avatar IA, busca avançada, selo Premium e muito mais.",
+    icon: <Gem />,
   },
 ];
 

@@ -13,7 +13,8 @@ interface Testimonial {
   quote: string;
   name: string;
   designation: string;
-  src: string;
+  src?: string;
+  icon?: React.ReactNode;
 }
 interface Colors {
   name?: string;
@@ -192,16 +193,28 @@ export const CircularTestimonials = ({
           className="relative w-full aspect-square max-w-md mx-auto"
           style={{ perspective: "1000px" }}
         >
-          {testimonials.map((testimonial, index) => (
-            <img
-              key={testimonial.src + index}
-              src={testimonial.src}
-              alt={testimonial.name}
-              draggable={false}
-              className="absolute inset-0 w-full h-full object-cover rounded-3xl shadow-2xl select-none"
-              style={getImageStyle(index)}
-            />
-          ))}
+          {testimonials.map((testimonial, index) =>
+            testimonial.icon ? (
+              <div
+                key={"icon-" + index}
+                className="absolute inset-0 w-full h-full rounded-3xl shadow-2xl select-none flex items-center justify-center bg-gradient-to-br from-secondary to-background border border-border"
+                style={getImageStyle(index)}
+              >
+                <div className="flex h-32 w-32 items-center justify-center rounded-full bg-[hsl(330,100%,50%)]/10 text-[hsl(330,100%,50%)] [&_svg]:h-16 [&_svg]:w-16">
+                  {testimonial.icon}
+                </div>
+              </div>
+            ) : (
+              <img
+                key={(testimonial.src ?? "") + index}
+                src={testimonial.src}
+                alt={testimonial.name}
+                draggable={false}
+                className="absolute inset-0 w-full h-full object-cover rounded-3xl shadow-2xl select-none"
+                style={getImageStyle(index)}
+              />
+            )
+          )}
         </div>
 
         {/* Content */}

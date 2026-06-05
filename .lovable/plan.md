@@ -1,35 +1,51 @@
 ## Objetivo
-Adaptar a página inicial (`/`) do site atual (Wediet) para a nova marca **Sexando**, trocando apenas textos, mantendo o layout, estrutura e componentes existentes.
+Substituir o conteúdo da página `/funcionalidades` (atualmente recursos do app de dieta) pelas 12 categorias de funcionalidades do **Sexando**, mantendo o carrossel circular existente, mas trocando as imagens por **ícones lucide-react**.
 
 ## Escopo
-- Homepage (`src/pages/Index.tsx`) e seus componentes filhos diretos: `Navbar`, `Hero`, `AnimatedMarqueeHero`, `Footer`.
-- Fora de escopo: outras rotas (`/inicio`, `/funcionalidades`, `/precos`, `/contato`, `/obrigado`, `/mobileapp`), backend, autenticação, banco de dados.
+- `src/components/ui/circular-testimonials.tsx` — adaptar para suportar ícone no lugar de imagem.
+- `src/pages/Funcionalidades.tsx` — substituir os dados pelas novas categorias.
+- Fora de escopo: backend, outras páginas, identidade visual (cores ficam para etapa futura).
+- **Omitir** a categoria "Painel Admin" (interna). Total: 12 categorias.
 
-## Alterações por componente
+## Alterações
 
-### 1. Navbar (`src/components/Navbar.tsx`)
-- Trocar logo/alt text de "Wediet" para "Sexando".
-- Trocar label do botão de download de "Baixe Agora" / "Download" para "Entrar" ou "Cadastrar" (placeholder, sem função de backend).
+### 1. `circular-testimonials.tsx`
+- Adicionar campo opcional `icon?: React.ReactNode` na interface `Testimonial` e tornar `src` opcional.
+- No painel esquerdo (pilha 3D), quando o item tiver `icon`, renderizar um **card** (mesma `getImageStyle` para preservar a animação de empilhamento/rotação) com:
+  - fundo claro/gradiente sutil, cantos arredondados (`rounded-3xl`), sombra.
+  - o ícone lucide grande e centralizado, na cor de destaque (hot pink atual).
+- Manter o comportamento de imagem para retrocompatibilidade (se `src` existir e não houver `icon`).
 
-### 2. Hero (`src/components/Hero.tsx`)
-- **Headline:** novo headline sobre "A rede social do estilo de vida liberal".
-- **Subheadline:** descrição curta do Sexando (rede social + comunidade + mídia + lives, desktop e mobile).
-- **CTA primário:** "Criar Conta" (placeholder, sem backend).
-- **CTA secundário:** "Assistir Demo" → manter ou adaptar para "Ver Como Funciona".
-- **Modal:** manter estrutura do modal, trocar título/label para captura de lead ("Cadastre-se para Acesso Antecipado" ou similar).
+### 2. `Funcionalidades.tsx`
+- Substituir o array `features` por 12 categorias, cada uma com:
+  - `name`: título da categoria (ex.: "Feed social").
+  - `designation`: tag curta com emoji original (ex.: "🏠 Comunidade").
+  - `quote`: parágrafo descritivo combinando os sub-recursos da categoria.
+  - `icon`: ícone lucide correspondente.
+- Mapa de categorias → ícones lucide:
+  - Feed social → `LayoutGrid`
+  - Perfis ricos → `UserCircle`
+  - Mensagens e chat → `MessageCircle`
+  - Chamadas de áudio e vídeo → `Video`
+  - Livecam → `Radio`
+  - Hot or Not → `Flame`
+  - Busca e descoberta → `Search`
+  - Amigos e seguidores → `Users`
+  - Notificações → `Bell`
+  - Privacidade e segurança → `ShieldCheck`
+  - Minha conta → `Settings`
+  - Premium → `Gem`
 
-### 3. AnimatedMarqueeHero (`src/components/AnimatedMarqueeHero.tsx`)
-- Apenas verificar se há alt text ou legendas com marca "Wediet" — trocar para "Sexando" se houver.
-
-### 4. Footer (`src/components/Footer.tsx`)
-- Trocar "Wediet" para "Sexando" em todos os textos visíveis.
-- Atualizar tagline: "Transforme sua alimentação..." → algo relacionado à comunidade/liberdade.
-- Ocultar ou adaptar links de contato específicos do Wediet (email, WhatsApp, endereço) para placeholders genéricos do Sexando.
+### Conteúdo (quotes resumidos por categoria)
+Cada `quote` será um parágrafo curto, ex.:
+- Feed social: "Feeds de Seguindo e Explorar, publicações com fotos e carrosséis, curtidas, comentários, stories e filtros por gênero e estado."
+- Mensagens e chat: "Mensagens privadas 1:1 em tempo real, reações flutuantes, envio de mídias, alerta de segurança anti-golpe e Avatar IA para esquentar o clima."
+- (e assim por diante para as 12)
 
 ## Pontos de atenção
-- Manter todos os tokens de design (cores, espaçamentos, tipografia, glassmorphism) do Wediet — a identidade visual nova (roxo/violeta noturno) será aplicada em etapa futura.
-- O botão "Cadastrar/Login" não precisa de funcionalidade real nesta etapa; pode ser um link vazio, `alert()` ou redirecionamento para `#`.
-- Preservar todos os atributos `href`, `to`, `src` de imagens e vídeos — substituir conteúdo visual é etapa futura.
+- Manter tokens de design atuais (hot pink de destaque, max-w-7xl, glassmorphism).
+- Preservar autoplay, navegação por setas e teclado do carrossel.
+- A página continua usando `Navbar` e `Footer` já adaptados ao Sexando.
 
 ## Entregável
-Página `/` renderizando com textos, headlines, CTAs e marca 100% Sexando, layout e componentes intactos.
+Página `/funcionalidades` exibindo as 12 categorias do Sexando no carrossel circular, com ícones lucide e descrições, sem referências ao app de dieta.
