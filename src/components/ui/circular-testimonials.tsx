@@ -13,7 +13,8 @@ interface Testimonial {
   quote: string;
   name: string;
   designation: string;
-  src: string;
+  src?: string;
+  icon?: React.ReactNode;
 }
 interface Colors {
   name?: string;
