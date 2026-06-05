@@ -1,0 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Base colors - SaaS theme */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 11%;
+    
+    /* Hero container background */
+    --hero-container: 220 14% 97%;
+    
+    /* Brand colors */
+    --primary: 240 10% 11%;
+    --primary-foreground: 0 0% 100%;
+    
+    --accent-purple: 330 100% 50%;
+    --accent-purple-foreground: 0 0% 100%;
+    
+    --secondary: 220 14% 97%;
+    --secondary-foreground: 240 10% 11%;
+    
+    /* UI elements */
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 11%;
+    
+    --muted: 220 13% 91%;
+    --muted-foreground: 220 9% 46%;
+    
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 330 100% 50%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 11%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --radius: 1rem;
+    
+    /* Custom tokens for landing page */
+    --badge-bg: 330 100% 97%;
+    --badge-text: 330 100% 50%;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --shadow-card: 0 20px 25px -5px rgb(0 0 0 / 0.05);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Sidebar */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 240 10% 11%;
+    --foreground: 0 0% 98%;
+    
+    --hero-container: 240 6% 15%;
+    
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 10% 11%;
+    
+    --accent-purple: 330 100% 50%;
+    --accent-purple-foreground: 0 0% 100%;
+    
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --card: 240 10% 11%;
+    --card-foreground: 0 0% 98%;
+    
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 65%;
+    
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 330 100% 50%;
+    
+    --popover: 240 10% 11%;
+    --popover-foreground: 0 0% 98%;
+    
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --badge-bg: 330 100% 15%;
+    --badge-text: 330 100% 50%;
+    
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased overflow-x-hidden;
+  }
+
+}
+
+@layer utilities {
+  /* Float animation for decorative elements */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes float-delayed {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-float-delayed {
+    animation: float-delayed 4s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+  
+  /* Fade in animation */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in-right 0.4s ease-out;
+}
+  
+  /* Custom shadows */
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+}
