@@ -75,10 +75,10 @@ const Navbar = () => {
 
           <div className="flex items-center gap-3">
             <div className="hidden md:inline-block">
-              <AnimatedDownloadButton href="https://apps.apple.com/app/we-diet/id6761124021" label="Baixe Agora" />
+              <AnimatedDownloadButton href="#" label="Cadastrar" />
             </div>
             <div className="md:hidden">
-              <AnimatedDownloadButton href="https://apps.apple.com/app/we-diet/id6761124021" label="Download" expandedWidth={150} />
+              <AnimatedDownloadButton href="#" label="Entrar" expandedWidth={150} />
             </div>
 
             {/* Mobile Stacked Menu - right aligned */}
