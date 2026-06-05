@@ -10,13 +10,13 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Brand Section */}
             <div>
-              <h3 className="text-xl font-bold text-primary mb-4">Wediet</h3>
+              <h3 className="text-xl font-bold text-primary mb-4">Sexando</h3>
               <p className="text-muted-foreground mb-4">
-                Transforme sua alimentação com tecnologia de ponta e suporte especializado.
+                A rede social brasileira do estilo de vida liberal. Casais, solteiros(as) e o universo swing — com perfis verificados e total privacidade.
               </p>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Heart className="h-4 w-4 text-red-500 fill-red-500" />
-                <span>Feito com amor para sua saúde</span>
+                <span>Feito para conexões livres e adultas</span>
               </div>
             </div>
 
