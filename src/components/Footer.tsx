@@ -44,24 +44,15 @@ const Footer = () => {
               <h3 className="text-lg font-semibold mb-4">Contato</h3>
               <div className="flex flex-col gap-3">
                 <a 
-                  href="mailto:comercial@wediet.app"
+                  href="mailto:contato@sexando.com.br"
                   className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
                 >
                   <Mail className="h-4 w-4" />
-                  <span className="text-sm">comercial@wediet.app</span>
-                </a>
-                <a 
-                  href="https://wa.me/5583999187322"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <Phone className="h-4 w-4" />
-                  <span className="text-sm">(83) 99918-7322</span>
+                  <span className="text-sm">contato@sexando.com.br</span>
                 </a>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <MapPin className="h-4 w-4" />
-                  <span className="text-sm">João Pessoa, Paraíba, Brasil</span>
+                  <span className="text-sm">Brasil</span>
                 </div>
               </div>
             </div>
