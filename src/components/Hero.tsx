@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
-import LeadCaptureModal from "@/components/LeadCaptureModal";
 import {
   Dialog,
   DialogContent,
 } from "@/components/ui/dialog";
 
 const Hero = () => {
-  const [modalOpen, setModalOpen] = useState(false);
   const [videoModalOpen, setVideoModalOpen] = useState(false);
 
   return (
@@ -29,25 +27,28 @@ const Hero = () => {
 
             {/* Headline */}
             <h1 className="mb-4 text-4xl font-light leading-tight tracking-tight md:text-6xl lg:text-7xl animate-fade-in-up">
-              <span className="text-foreground">Analise sua refeição. </span>
-              <span className="text-accent">Melhore sua alimentação. </span>
-              <span className="text-foreground">Viva sua melhor versão.</span>
+              <span className="text-foreground">A rede social do </span>
+              <span className="text-accent">estilo de vida liberal. </span>
+              <span className="text-foreground">Conexões reais, sem julgamentos.</span>
             </h1>
 
             {/* Subheadline */}
             <p className="mb-6 text-lg text-muted-foreground md:text-xl animate-fade-in-up">
-              Wediet ajuda você a escanear alimentos, acompanhar macros e conquistar seus objetivos de dieta com inteligência artificial e praticidade. a escanear alimentos, acompanhar macros e conquistar seus objetivos de dieta com inteligência artificial e praticidade.
+              O Sexando reúne casais liberais, solteiros(as) e praticantes do estilo swing em um só lugar:
+              rede social, comunidade, mídia adulta amadora e chamadas ao vivo. Perfis verificados,
+              total privacidade — no desktop e no mobile.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row animate-fade-in-up">
-              <Button 
-                size="lg" 
-                onClick={() => setModalOpen(true)}
-                className="bg-[hsl(330,100%,50%)] text-white hover:bg-[hsl(330,100%,45%)] hover:scale-105 transition-all shadow-lg border-2 border-[hsl(330,100%,50%)]"
-              >
-                Monte sua Dieta Grátis
-              </Button>
+              <a href="#">
+                <Button 
+                  size="lg" 
+                  className="bg-[hsl(330,100%,50%)] text-white hover:bg-[hsl(330,100%,45%)] hover:scale-105 transition-all shadow-lg border-2 border-[hsl(330,100%,50%)]"
+                >
+                  Criar Conta Grátis
+                </Button>
+              </a>
               <Button 
                 size="lg" 
                 variant="outline"
@@ -55,12 +56,9 @@ const Hero = () => {
                 className="border-2 border-foreground bg-transparent text-foreground hover:bg-foreground hover:text-background transition-all hover:scale-105"
               >
                 <Play className="mr-2 h-5 w-5" />
-                Assistir Demo
+                Ver Como Funciona
               </Button>
             </div>
-
-            {/* Lead Capture Modal */}
-            <LeadCaptureModal open={modalOpen} onOpenChange={setModalOpen} />
 
             {/* Video Demo Modal */}
             <Dialog open={videoModalOpen} onOpenChange={setVideoModalOpen}>
