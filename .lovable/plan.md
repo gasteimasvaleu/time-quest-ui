@@ -1,22 +1,63 @@
 ## Objetivo
-Atualizar os 5 cards do `CardStack` na página `/inicio` para refletir os CTAs do Sexando, substituindo os textos e descrições atuais do Wediet.
+Remodelar a página `/precos` (Sexando) com a estrutura **Free + Premium com seletor de período** (Mensal / Trimestral / Anual), substituindo os dois cards atuais de promoção do Wediet.
 
-## Alterações
+## Layout proposto
 
-### `src/pages/Inicio.tsx`
-Substituir o array `PLACEHOLDER_ITEMS` pelos 5 novos CTAs do Sexando:
+```text
+                  Pré-título / Typewriter (atualizado p/ Sexando)
 
-1. **Descoberta** — "Conheça pessoas reais na sua cidade. Entre grátis."
-2. **Engajamento** — "Encontre o par ideal. Filtre por cidade, idade e preferências — agora."
-3. **Social Proof** — "Milhares de casais e solteiros já estão conectando. O que você está esperando?"
-4. **Urgência + Benefício** — "Desbloqueie mensagens ilimitadas e veja quem te visitou. Vira Premium agora."
-5. **Comunidade + Confiança** — "100% brasileiro, verificado e seguro. Seu encontro começa aqui."
+   ┌─────────────────────┐     ┌──────────────────────────────────┐
+   │  Sexando Free        │     │  Sexando Premium                 │
+   │  R$ 0                │     │  [ Mensal ][ Trimestral ][ Anual ]│  <- seletor
+   │  O básico, limites   │     │  R$ 39,90/mês  (muda c/ seletor)  │
+   │  diários             │     │  ~economia / melhor oferta        │
+   │  • Perfil completo   │     │  • Mensagens ilimitadas           │
+   │  • Feed/curtidas...  │     │  • Lista de visitantes...         │
+   │  [ Começar grátis ]  │     │  [ Assinar Premium ]              │
+   └─────────────────────┘     └──────────────────────────────────┘
 
-## Decisões pendentes
-- **Imagens**: as imagens atuais são de fitness/comida (Wediet) e não fazem sentido para o Sexando. Sem novas URLs fornecidas, os cards exibirão o estado "No image" (fundo cinza com texto). Se o usuário quiser imagens específicas, pode fornecer as URLs posteriormente.
-- **Links/CTA**: os cards atuais são apenas exibição (título + descrição sobre imagem). Sem links `href` fornecidos, os cards continuarão como apresentação visual.
+              💳 Pagamento seguro • 🔒 Criptografado • 🔄 Cancele quando quiser
+```
 
-## Escopo
-- Apenas `src/pages/Inicio.tsx`.
-- Nenhuma alteração no componente `CardStack` ou em outras páginas.
-- Nenhuma alteração visual além da troca de conteúdo dos cards.
+## Conteúdo dos planos
+
+**Sexando Free — R$ 0** (limites diários)
+- Perfil completo + fotos e vídeos
+- Feed, curtidas e comentários
+- 10 mensagens por dia
+- 1 storie / foto / vídeo / publicação por dia
+- Explorar com cards opacos (preview)
+- CTA: "Começar grátis"
+
+**Sexando Premium** (card com seletor de período)
+- Mensal — R$ 39,90/mês · "Cobrança mensal recorrente"
+- Trimestral — R$ 89,90 a cada 3 meses · "~R$ 29,97/mês · ~25% de economia"
+- Anual — R$ 239,99/ano · "~R$ 20,00/mês · ~50% de economia" · badge **Melhor oferta**
+
+Lista de benefícios (igual para os 3 períodos):
+- Mensagens ilimitadas
+- Lista completa de visitantes (sem blur)
+- Quem viu seus stories
+- Ligações de vídeo ilimitadas
+- Acesso total a Hot or Not, Livecam e AI Avatar
+- Modo incógnito (visita perfis sem aparecer)
+- Selo Premium e destaque no feed e busca
+- Uploads ilimitados (fotos, vídeos, stories, posts)
+- CTA: "Assinar Premium"
+
+## Comportamento do seletor
+- Três botões (Mensal / Trimestral / Anual) no topo do card Premium.
+- Ao trocar, atualiza: preço grande, texto de período/cobrança, linha de economia/equivalência, e o badge "Melhor oferta" aparece só no Anual.
+- Estado via `useState` (padrão: Anual, por ser a melhor oferta — ou Mensal, ajustável).
+
+## Mudanças de arquivos
+- **`src/components/ui/squishy-pricing.tsx`** — reescrever: card Free fixo + card Premium com `useState` do período e dados dos 3 planos. Manter a estética atual (cards arredondados, animação framer-motion, BGComponents, accent hot pink da marca).
+- **`src/pages/Precos.tsx`** — atualizar textos do Typewriter e subtítulo para Sexando (remover copy de "Nutrição/dieta").
+
+## Links dos botões (pendente)
+Você escolheu **"Outro link / checkout"**. Vou deixar os CTAs apontando para uma constante `CHECKOUT_URL` (placeholder `#`) por enquanto. Assim que enviar as URLs (uma por plano ou uma única de checkout), eu ligo os botões. Pode me passar:
+- URL do "Começar grátis" (Free)
+- URL(s) de assinatura Premium (Mensal / Trimestral / Anual — uma só ou separadas)
+
+## Observação
+A copy atual da página ainda é do Wediet (nutrição). Vou substituí-la por copy do Sexando. Se quiser textos específicos no hero, me diga; senão uso uma versão enxuta focada em relacionamento/Premium.
