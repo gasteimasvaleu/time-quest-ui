@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import { CircularTestimonials } from "@/components/ui/circular-testimonials";
 import {
   LayoutGrid,
-  Search,
   Users,
   Bell,
   ShieldCheck,
@@ -59,7 +58,7 @@ const features = [
     designation: "🔎 Encontre quem importa",
     quote:
       "Busca avançada por gênero, cidade, estado, idade e online agora, Top Sexando, perto de você e sugestões de amizade personalizadas.",
-    icon: <Search />,
+    src: "https://jkdtqihgliygacjt.supabase.co/storage/v1/object/public/criativos/021780739982108d2ccc3ebdfdab12ac26ff482d60ed0ee13f980_0.jpeg",
   },
   {
     name: "Amigos e seguidores",
