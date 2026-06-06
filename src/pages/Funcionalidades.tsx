@@ -22,7 +22,7 @@ const features = [
     designation: "🏠 Comunidade",
     quote:
       "Feeds de Seguindo e Explorar, publicações com fotos e carrosséis, curtidas, comentários, stories com reações e filtros por gênero e estado.",
-    icon: <LayoutGrid />,
+    src: "https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/021780739527001e1f2c28e220bf76d8a56e2a46eaa08e96346c1_0.jpeg",
   },
   {
     name: "Perfis ricos",
