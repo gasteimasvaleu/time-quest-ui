@@ -3,8 +3,6 @@ import Footer from "@/components/Footer";
 import { CircularTestimonials } from "@/components/ui/circular-testimonials";
 import {
   LayoutGrid,
-  
-  Video,
   Radio,
   Flame,
   Search,
@@ -42,7 +40,7 @@ const features = [
     designation: "📞 Ao vivo e privado",
     quote:
       "Ligações de áudio e vídeo privadas entre membros direto pelo app, com modal de chamada recebida e total discrição.",
-    icon: <Video />,
+    src: "https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/021780739766892fd3ae808d5ba084b55a7f9e1600032cdf60c97_0.jpeg",
   },
   {
     name: "Livecam",
