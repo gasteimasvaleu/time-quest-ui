@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import { CircularTestimonials } from "@/components/ui/circular-testimonials";
 import {
   LayoutGrid,
-  UserCircle,
   MessageCircle,
   Video,
   Radio,
@@ -29,7 +28,7 @@ const features = [
     designation: "👤 Sua vitrine",
     quote:
       "Perfil com fotos, vídeos, bio e localização, abas de publicações e estatísticas, selo de certificação, selo Premium e visitantes do perfil.",
-    icon: <UserCircle />,
+    src: "https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/021780739375305e1f2c28e220bf76d8a56e2a46eaa08e9dce98f_0.jpeg",
   },
   {
     name: "Mensagens e chat",
