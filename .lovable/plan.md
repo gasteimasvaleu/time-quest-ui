@@ -1,7 +1,9 @@
-Alterar as constantes `FREE_URL` e `CHECKOUT_URL` em `src/components/ui/squishy-pricing.tsx` para apontar para `https://app.sexando.com/login`.
+Substituir a imagem do logo no Navbar para ter versões diferentes em desktop e mobile.
 
-Mudança técnica:
-- Linhas 6-7: substituir `"#"` por `"https://app.sexando.com/login"` em ambas as constantes.
-- Remover o comentário `TODO` acima delas.
+## Alteração
+- No arquivo `src/components/Navbar.tsx`, substituir a única `<img>` do logo por duas tags:
+  - **Desktop** (`md:block hidden`): `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/sexando.png`
+  - **Mobile** (`md:hidden`): `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/logonav.png`
 
-Isso faz com que tanto o botão "Começar grátis" (Free) quanto "Assinar Premium" (todos os períodos) redirecionem para o login do Sexando.
+## Como
+Usar classes utilitárias do Tailwind (`hidden md:block` e `md:hidden`) dentro do mesmo `<Link>` para alternar a imagem por breakpoint sem alterar layout ou comportamento do nav.
