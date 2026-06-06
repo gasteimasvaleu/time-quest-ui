@@ -52,7 +52,7 @@ const features = [
     designation: "🔥 Recurso Premium",
     quote:
       "Poste sua foto, dê notas e veja quem está bombando no ranking da comunidade. Pura adrenalina, liberado no Premium.",
-    icon: <Flame />,
+    src: "https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/02178073991064949d9e4e345fff0a9cbe1dfa11f8e7ca03c45d7_0.jpeg",
   },
   {
     name: "Busca e descoberta",
