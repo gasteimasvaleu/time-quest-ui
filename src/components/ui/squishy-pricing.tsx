@@ -239,7 +239,8 @@ const PremiumBG = () => (
     xmlns="http://www.w3.org/2000/svg"
     variants={{ hover: { scale: 1.5 } }}
     transition={{ duration: 1, ease: "backInOut" }}
-    className="absolute inset-0 z-0"
+    className="absolute inset-0 z-0 h-full w-full"
+    preserveAspectRatio="xMidYMid slice"
   >
     <motion.circle
       variants={{ hover: { scaleY: 0.5, y: -25 } }}
