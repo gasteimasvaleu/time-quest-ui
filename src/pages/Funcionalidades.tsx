@@ -46,7 +46,7 @@ const features = [
     designation: "🔴 Transmissões ao vivo",
     quote:
       "Transmissões ao vivo da comunidade com chat em tempo real durante a live e lives recentes destacadas no Explorar.",
-    icon: <Radio />,
+    src: "https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/0217807398092774dfea62baf69d67974043520385d8b3c177c76_0.jpeg",
   },
   {
     name: "Hot or Not",
