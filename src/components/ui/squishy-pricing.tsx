@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 
-// TODO: substituir pelos links de checkout reais
-const FREE_URL = "#";
-const CHECKOUT_URL = "#";
+const FREE_URL = "https://app.sexando.com/login";
+const CHECKOUT_URL = "https://app.sexando.com/login";
 
 type Period = "mensal" | "trimestral" | "anual";
 
