@@ -1,51 +1,17 @@
 ## Objetivo
-Substituir o conteúdo da página `/funcionalidades` (atualmente recursos do app de dieta) pelas 12 categorias de funcionalidades do **Sexando**, mantendo o carrossel circular existente, mas trocando as imagens por **ícones lucide-react**.
+Substituir as 12 imagens atuais do `AnimatedMarqueeHero` (home page) pelas 6 novas imagens fornecidas, repetidas para manter o total de 12 posições.
+
+## Alteração
+- Arquivo: `src/pages/Index.tsx`
+- Array `MARQUEE_IMAGES`: trocar as 12 URLs antigas pelas 6 novas URLs, duplicadas em sequência (imagem 1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6).
+
+## Novas URLs
+1. `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/image_1780737102775_a4b4cc65.png`
+2. `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/image_1780737297788_9ae4deb1.png`
+3. `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/image_1780737282298_1295dcd7.png`
+4. `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/image_1780737305187_005ba697.png`
+5. `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/image_1780737403309_e1068cf9.png`
+6. `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/image_1780737447556_0510a572.png`
 
 ## Escopo
-- `src/components/ui/circular-testimonials.tsx` — adaptar para suportar ícone no lugar de imagem.
-- `src/pages/Funcionalidades.tsx` — substituir os dados pelas novas categorias.
-- Fora de escopo: backend, outras páginas, identidade visual (cores ficam para etapa futura).
-- **Omitir** a categoria "Painel Admin" (interna). Total: 12 categorias.
-
-## Alterações
-
-### 1. `circular-testimonials.tsx`
-- Adicionar campo opcional `icon?: React.ReactNode` na interface `Testimonial` e tornar `src` opcional.
-- No painel esquerdo (pilha 3D), quando o item tiver `icon`, renderizar um **card** (mesma `getImageStyle` para preservar a animação de empilhamento/rotação) com:
-  - fundo claro/gradiente sutil, cantos arredondados (`rounded-3xl`), sombra.
-  - o ícone lucide grande e centralizado, na cor de destaque (hot pink atual).
-- Manter o comportamento de imagem para retrocompatibilidade (se `src` existir e não houver `icon`).
-
-### 2. `Funcionalidades.tsx`
-- Substituir o array `features` por 12 categorias, cada uma com:
-  - `name`: título da categoria (ex.: "Feed social").
-  - `designation`: tag curta com emoji original (ex.: "🏠 Comunidade").
-  - `quote`: parágrafo descritivo combinando os sub-recursos da categoria.
-  - `icon`: ícone lucide correspondente.
-- Mapa de categorias → ícones lucide:
-  - Feed social → `LayoutGrid`
-  - Perfis ricos → `UserCircle`
-  - Mensagens e chat → `MessageCircle`
-  - Chamadas de áudio e vídeo → `Video`
-  - Livecam → `Radio`
-  - Hot or Not → `Flame`
-  - Busca e descoberta → `Search`
-  - Amigos e seguidores → `Users`
-  - Notificações → `Bell`
-  - Privacidade e segurança → `ShieldCheck`
-  - Minha conta → `Settings`
-  - Premium → `Gem`
-
-### Conteúdo (quotes resumidos por categoria)
-Cada `quote` será um parágrafo curto, ex.:
-- Feed social: "Feeds de Seguindo e Explorar, publicações com fotos e carrosséis, curtidas, comentários, stories e filtros por gênero e estado."
-- Mensagens e chat: "Mensagens privadas 1:1 em tempo real, reações flutuantes, envio de mídias, alerta de segurança anti-golpe e Avatar IA para esquentar o clima."
-- (e assim por diante para as 12)
-
-## Pontos de atenção
-- Manter tokens de design atuais (hot pink de destaque, max-w-7xl, glassmorphism).
-- Preservar autoplay, navegação por setas e teclado do carrossel.
-- A página continua usando `Navbar` e `Footer` já adaptados ao Sexando.
-
-## Entregável
-Página `/funcionalidades` exibindo as 12 categorias do Sexando no carrossel circular, com ícones lucide e descrições, sem referências ao app de dieta.
+Apenas `src/pages/Index.tsx`. Nenhuma outra alteração de UI ou lógica.
