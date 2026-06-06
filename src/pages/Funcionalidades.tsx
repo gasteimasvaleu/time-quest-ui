@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import { CircularTestimonials } from "@/components/ui/circular-testimonials";
 import {
   LayoutGrid,
-  Gem,
 } from "lucide-react";
 
 const features = [
@@ -89,7 +88,7 @@ const features = [
     designation: "💎 Experiência completa",
     quote:
       "Pagamentos via Mercado Pago (Pix e cartão) que desbloqueiam Hot or Not, Avatar IA, busca avançada, selo Premium e muito mais.",
-    icon: <Gem />,
+    src: "https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/021780740561800b60c2cebbbed8b1cc7b57b46439bb32b547052_0.jpeg",
   },
 ];
 
