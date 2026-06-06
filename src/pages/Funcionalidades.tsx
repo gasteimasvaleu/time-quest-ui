@@ -78,12 +78,12 @@ const features = [
     src: "https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/021780740253904d4c69f90bdf814940b1abafd46c62ec67889d0_0.jpeg",
   },
   {
-    name: "Minha conta",
-    designation: "⚙️ Tudo no seu jeito",
-    quote:
-      "Edição de perfil, e-mail e senha, preferências de notificação, gestão da assinatura Premium e histórico de login e pagamentos.",
-    icon: <Settings />,
-  },
+     name: "Minha conta",
+     designation: "⚙️ Tudo no seu jeito",
+     quote:
+       "Edição de perfil, e-mail e senha, preferências de notificação, gestão da assinatura Premium e histórico de login e pagamentos.",
+     src: "https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/021780740319807e142d87b6a9bdf1f5f94f64260ca2a933d66ba_0.jpeg",
+   },
   {
     name: "Premium",
     designation: "💎 Experiência completa",
