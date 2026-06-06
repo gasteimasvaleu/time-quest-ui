@@ -1,9 +1,11 @@
-Substituir a imagem do logo no Navbar para ter versões diferentes em desktop e mobile.
+## Ajustar tamanho das logos na navbar
 
-## Alteração
-- No arquivo `src/components/Navbar.tsx`, substituir a única `<img>` do logo por duas tags:
-  - **Desktop** (`md:block hidden`): `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/sexando.png`
-  - **Mobile** (`md:hidden`): `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/logonav.png`
+### Objetivo
+Reduzir a altura das imagens de logo na navbar de 56px (`h-14`) para 44px (`h-11`), tanto na versão desktop quanto mobile.
 
-## Como
-Usar classes utilitárias do Tailwind (`hidden md:block` e `md:hidden`) dentro do mesmo `<Link>` para alternar a imagem por breakpoint sem alterar layout ou comportamento do nav.
+### Alteração
+- Arquivo: `src/components/Navbar.tsx`
+- Linhas 32–33: substituir `h-14` por `h-11` nas duas tags `<img>` (desktop e mobile).
+
+### Resultado esperado
+Logos menores e mais equilibradas dentro do navbar glassmorphism, mantendo a proporção original das imagens.

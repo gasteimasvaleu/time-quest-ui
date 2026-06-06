@@ -29,8 +29,8 @@ const Navbar = () => {
       <nav className="mx-auto max-w-7xl rounded-2xl border border-white/20 bg-white/70 backdrop-blur-xl shadow-lg px-6 py-4">
         <div className="flex items-center justify-between">
           <Link to="/">
-            <img src="https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/sexando.png" alt="Sexando" className="hidden md:block h-14" />
-            <img src="https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/logonav.png" alt="Sexando" className="md:hidden h-14" />
+            <img src="https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/sexando.png" alt="Sexando" className="hidden md:block h-11" />
+            <img src="https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/logonav.png" alt="Sexando" className="md:hidden h-11" />
           </Link>
 
           {/* Desktop Gradient Menu */}
