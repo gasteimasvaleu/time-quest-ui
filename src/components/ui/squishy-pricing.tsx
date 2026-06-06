@@ -70,14 +70,14 @@ export const SquishyPricing = () => {
   const plan = premiumPlans[period];
 
   return (
-    <section className="px-4 py-16">
+    <section className="px-4 pt-20 pb-16">
       <div className="mx-auto flex w-fit flex-wrap items-stretch justify-center gap-6">
         {/* Free Card */}
         <motion.div
           whileHover="hover"
           transition={{ duration: 1, ease: "backInOut" }}
           variants={{ hover: { scale: 1.03 } }}
-          className="relative flex h-[620px] w-80 shrink-0 flex-col overflow-hidden rounded-xl bg-neutral-700 p-8 shadow-lg transition-shadow hover:shadow-xl"
+          className="relative flex min-h-[620px] w-80 shrink-0 flex-col overflow-hidden rounded-xl bg-neutral-700 p-8 shadow-lg transition-shadow hover:shadow-xl"
         >
           <div className="relative z-10 flex flex-1 flex-col text-white">
             <span className="mb-3 block w-fit rounded-full border border-white/20 bg-white/20 px-3 py-0.5 text-sm font-medium text-white backdrop-blur-sm">
@@ -112,82 +112,84 @@ export const SquishyPricing = () => {
         </motion.div>
 
         {/* Premium Card */}
-        <motion.div
-          whileHover="hover"
-          transition={{ duration: 1, ease: "backInOut" }}
-          variants={{ hover: { scale: 1.05 } }}
-          className="relative flex h-[620px] w-80 shrink-0 flex-col overflow-hidden rounded-xl bg-primary p-8 shadow-lg transition-shadow hover:shadow-xl"
-        >
+        <div className="relative w-80 shrink-0">
           {plan.popular && (
-            <div className="absolute -top-3 left-1/2 z-20 -translate-x-1/2">
+            <div className="absolute -top-3 left-1/2 z-30 -translate-x-1/2">
               <span className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-1 text-sm font-semibold text-primary shadow-md">
                 ⭐ Melhor oferta
               </span>
             </div>
           )}
 
-          <div className="relative z-10 flex flex-1 flex-col text-white">
-            <span className="mb-3 block w-fit rounded-full border border-white/20 bg-white/20 px-3 py-0.5 text-sm font-medium text-white backdrop-blur-sm">
-              Sexando Premium
-            </span>
-
-            {/* Period selector */}
-            <div className="mb-4 grid grid-cols-3 gap-1 rounded-full bg-black/20 p-1">
-              {(Object.keys(premiumPlans) as Period[]).map((p) => (
-                <button
-                  key={p}
-                  type="button"
-                  onClick={() => setPeriod(p)}
-                  className={`rounded-full py-1.5 text-xs font-semibold capitalize transition-colors ${
-                    period === p ? "bg-white text-primary" : "text-white/80 hover:text-white"
-                  }`}
-                >
-                  {premiumPlans[p].label}
-                </button>
-              ))}
-            </div>
-
-            <motion.div
-              key={period}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="my-2 origin-top-left"
-            >
-              <span className="font-mono text-5xl font-black leading-[1.2]">R$ {plan.price}</span>
-              <span className="text-2xl font-bold">/{plan.period}</span>
-            </motion.div>
-
-            <p className="text-sm text-white/90">{plan.billing}</p>
-            {plan.equivalent && (
-              <p className="mt-1 text-sm font-medium text-white/90">{plan.equivalent}</p>
-            )}
-            {plan.discount && (
-              <span className="mt-2 inline-block w-fit rounded-full bg-white/25 px-3 py-0.5 text-xs font-bold text-white">
-                {plan.discount}
+          <motion.div
+            whileHover="hover"
+            transition={{ duration: 1, ease: "backInOut" }}
+            variants={{ hover: { scale: 1.05 } }}
+            className="relative flex min-h-[620px] w-full flex-col overflow-hidden rounded-xl bg-primary p-8 shadow-lg transition-shadow hover:shadow-xl"
+          >
+            <div className="relative z-10 flex flex-1 flex-col text-white">
+              <span className="mb-3 block w-fit rounded-full border border-white/20 bg-white/20 px-3 py-0.5 text-sm font-medium text-white backdrop-blur-sm">
+                Sexando Premium
               </span>
-            )}
 
-            <div className="my-4 space-y-2">
-              {premiumFeatures.map((feature, index) => (
-                <div key={index} className="flex items-start gap-2">
-                  <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-white" />
-                  <span className="text-xs text-white/95">{feature}</span>
-                </div>
-              ))}
+              {/* Period selector */}
+              <div className="mb-4 grid grid-cols-3 gap-1 rounded-full bg-black/20 p-1">
+                {(Object.keys(premiumPlans) as Period[]).map((p) => (
+                  <button
+                    key={p}
+                    type="button"
+                    onClick={() => setPeriod(p)}
+                    className={`rounded-full py-1.5 text-xs font-semibold capitalize transition-colors ${
+                      period === p ? "bg-white text-primary" : "text-white/80 hover:text-white"
+                    }`}
+                  >
+                    {premiumPlans[p].label}
+                  </button>
+                ))}
+              </div>
+
+              <motion.div
+                key={period}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="my-2 origin-top-left"
+              >
+                <span className="font-mono text-5xl font-black leading-[1.2]">R$ {plan.price}</span>
+                <span className="text-2xl font-bold">/{plan.period}</span>
+              </motion.div>
+
+              <p className="text-sm text-white/90">{plan.billing}</p>
+              {plan.equivalent && (
+                <p className="mt-1 text-sm font-medium text-white/90">{plan.equivalent}</p>
+              )}
+              {plan.discount && (
+                <span className="mt-2 inline-block w-fit rounded-full bg-white/25 px-3 py-0.5 text-xs font-bold text-white">
+                  {plan.discount}
+                </span>
+              )}
+
+              <div className="my-4 space-y-2">
+                {premiumFeatures.map((feature, index) => (
+                  <div key={index} className="flex items-start gap-2">
+                    <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-white" />
+                    <span className="text-xs text-white/95">{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+              <a
+                href={plan.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-auto block rounded-lg border-2 border-white bg-white py-2.5 text-center font-mono font-black uppercase text-primary backdrop-blur-sm transition-all duration-200 hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50"
+              >
+                Assinar Premium
+              </a>
             </div>
-
-            <a
-              href={plan.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-auto block rounded-lg border-2 border-white bg-white py-2.5 text-center font-mono font-black uppercase text-primary backdrop-blur-sm transition-all duration-200 hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50"
-            >
-              Assinar Premium
-            </a>
-          </div>
-          <PremiumBG />
-        </motion.div>
+            <PremiumBG />
+          </motion.div>
+        </div>
       </div>
     </section>
   );
