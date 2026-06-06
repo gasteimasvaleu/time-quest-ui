@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import { CircularTestimonials } from "@/components/ui/circular-testimonials";
 import {
   LayoutGrid,
-  Bell,
   ShieldCheck,
   Settings,
   Gem,
@@ -71,7 +70,7 @@ const features = [
     designation: "🔔 Nada passa batido",
     quote:
       "Push notifications no navegador e mobile para curtidas, comentários, novos seguidores, mensagens e lives, com central de notificações.",
-    icon: <Bell />,
+    src: "https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/0217807401521211386b9a8ed856c57501cfa946ce34c98f7bc2d_0.jpeg",
   },
   {
     name: "Privacidade e segurança",
