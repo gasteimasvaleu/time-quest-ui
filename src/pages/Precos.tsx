@@ -15,9 +15,9 @@ const Precos = () => {
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
             <Typewriter
               text={[
-                "Wediet – Nutrição Inteligente",
-                "Nutrição na Palma da Sua Mão",
-                "Sua saúde com tecnologia de ponta",
+                "Sexando – Escolha seu plano",
+                "Conexões sem limites",
+                "Desbloqueie tudo com o Premium",
               ]}
               speed={60}
               waitTime={2000}
@@ -26,7 +26,7 @@ const Precos = () => {
             />
           </h1>
           <p className="mt-4 text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
-            Com o Wediet, você tem acesso a uma solução completa de nutrição e acompanhamento alimentar, tudo em um só lugar. Simplifique sua rotina, alcance seus objetivos e cuide da sua saúde com tecnologia de ponta e suporte especializado.
+            Comece grátis e descubra tudo o que o Sexando oferece. Quando quiser mais, o Premium libera mensagens ilimitadas, visitantes sem blur, modo incógnito e acesso total a Hot or Not, Livecam e AI Avatar.
           </p>
         </div>
       </section>
