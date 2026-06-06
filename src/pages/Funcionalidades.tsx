@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import { CircularTestimonials } from "@/components/ui/circular-testimonials";
 import {
   LayoutGrid,
-  ShieldCheck,
   Settings,
   Gem,
 } from "lucide-react";
@@ -77,7 +76,7 @@ const features = [
     designation: "🔒 No controle",
     quote:
       "Modo incógnito, bloqueio bidirecional, controle de quem vê suas fotos e perfil, denúncias, verificação +18 e certificação de foto.",
-    icon: <ShieldCheck />,
+    src: "https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/021780740253904d4c69f90bdf814940b1abafd46c62ec67889d0_0.jpeg",
   },
   {
     name: "Minha conta",
