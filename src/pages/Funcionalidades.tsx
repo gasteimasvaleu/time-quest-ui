@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { CircularTestimonials } from "@/components/ui/circular-testimonials";
 import {
   LayoutGrid,
-  MessageCircle,
+  
   Video,
   Radio,
   Flame,
@@ -35,7 +35,7 @@ const features = [
     designation: "💬 Conexões em tempo real",
     quote:
       "Mensagens privadas 1:1, reações flutuantes, envio de mídias, alerta de segurança anti-golpe e Avatar IA para esquentar o clima.",
-    icon: <MessageCircle />,
+    src: "https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/0217807395727564498c7002523dcce63b4e4e02dd9ae9c76d04d_0.jpeg",
   },
   {
     name: "Chamadas de áudio e vídeo",
