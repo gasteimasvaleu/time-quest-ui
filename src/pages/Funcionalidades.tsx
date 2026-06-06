@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import { CircularTestimonials } from "@/components/ui/circular-testimonials";
 import {
   LayoutGrid,
-  Users,
   Bell,
   ShieldCheck,
   Settings,
@@ -65,7 +64,7 @@ const features = [
     designation: "👥 Prova social",
     quote:
       "Sistema de seguir, amizades e favoritos, com recomendações públicas escritas por outros membros que reforçam sua reputação.",
-    icon: <Users />,
+    src: "https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/0217807401063315482bcf7e80bfa8bf500513aca3a704d9c8928_0.jpeg",
   },
   {
     name: "Notificações",
