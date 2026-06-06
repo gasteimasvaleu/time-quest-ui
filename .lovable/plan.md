@@ -1,17 +1,22 @@
 ## Objetivo
-Substituir as 12 imagens atuais do `AnimatedMarqueeHero` (home page) pelas 6 novas imagens fornecidas, repetidas para manter o total de 12 posições.
+Atualizar os 5 cards do `CardStack` na página `/inicio` para refletir os CTAs do Sexando, substituindo os textos e descrições atuais do Wediet.
 
-## Alteração
-- Arquivo: `src/pages/Index.tsx`
-- Array `MARQUEE_IMAGES`: trocar as 12 URLs antigas pelas 6 novas URLs, duplicadas em sequência (imagem 1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6).
+## Alterações
 
-## Novas URLs
-1. `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/image_1780737102775_a4b4cc65.png`
-2. `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/image_1780737297788_9ae4deb1.png`
-3. `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/image_1780737282298_1295dcd7.png`
-4. `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/image_1780737305187_005ba697.png`
-5. `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/image_1780737403309_e1068cf9.png`
-6. `https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/image_1780737447556_0510a572.png`
+### `src/pages/Inicio.tsx`
+Substituir o array `PLACEHOLDER_ITEMS` pelos 5 novos CTAs do Sexando:
+
+1. **Descoberta** — "Conheça pessoas reais na sua cidade. Entre grátis."
+2. **Engajamento** — "Encontre o par ideal. Filtre por cidade, idade e preferências — agora."
+3. **Social Proof** — "Milhares de casais e solteiros já estão conectando. O que você está esperando?"
+4. **Urgência + Benefício** — "Desbloqueie mensagens ilimitadas e veja quem te visitou. Vira Premium agora."
+5. **Comunidade + Confiança** — "100% brasileiro, verificado e seguro. Seu encontro começa aqui."
+
+## Decisões pendentes
+- **Imagens**: as imagens atuais são de fitness/comida (Wediet) e não fazem sentido para o Sexando. Sem novas URLs fornecidas, os cards exibirão o estado "No image" (fundo cinza com texto). Se o usuário quiser imagens específicas, pode fornecer as URLs posteriormente.
+- **Links/CTA**: os cards atuais são apenas exibição (título + descrição sobre imagem). Sem links `href` fornecidos, os cards continuarão como apresentação visual.
 
 ## Escopo
-Apenas `src/pages/Index.tsx`. Nenhuma outra alteração de UI ou lógica.
+- Apenas `src/pages/Inicio.tsx`.
+- Nenhuma alteração no componente `CardStack` ou em outras páginas.
+- Nenhuma alteração visual além da troca de conteúdo dos cards.
