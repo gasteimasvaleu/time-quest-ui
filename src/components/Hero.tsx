@@ -44,7 +44,7 @@ const Hero = () => {
             </h1>
 
             {/* Subheadline */}
-            <p className="mb-6 text-lg text-muted-foreground md:text-xl animate-fade-in-up">
+            <p className="mb-6 text-lg text-gray-700 md:text-xl animate-fade-in-up">
               O Sexando reúne casais liberais, solteiros(as) e praticantes do estilo swing em um só lugar:
               rede social, comunidade, mídia adulta amadora e chamadas ao vivo. Perfis verificados,
               total privacidade — no desktop e no mobile.
