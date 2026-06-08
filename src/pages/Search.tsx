@@ -38,6 +38,94 @@ const confidenceClass: Record<SearchResult["confidence"], string> = {
   baixa: "border-border bg-muted text-muted-foreground",
 };
 
+const MATCH_REGEX = "swing|liberal|priv[eê]|casais|adult[oa]|sensual|fetiche|fetish|lifestyle";
+
+const buildAddress = (tags: Record<string, string>) =>
+  [tags["addr:street"], tags["addr:housenumber"], tags["addr:suburb"], tags["addr:city"], tags["addr:state"]]
+    .filter(Boolean)
+    .join(", ");
+
+const searchPublicData = async (city: string, state: string): Promise<SearchResponse> => {
+  const geocodeUrl = new URL("https://nominatim.openstreetmap.org/search");
+  geocodeUrl.searchParams.set("format", "jsonv2");
+  geocodeUrl.searchParams.set("addressdetails", "1");
+  geocodeUrl.searchParams.set("countrycodes", "br");
+  geocodeUrl.searchParams.set("limit", "1");
+  geocodeUrl.searchParams.set("q", `${city}${state ? `, ${state}` : ""}, Brasil`);
+
+  const geocodeResponse = await fetch(geocodeUrl, { headers: { "Accept-Language": "pt-BR,pt;q=0.9" } });
+  if (!geocodeResponse.ok) throw new Error("Não foi possível localizar a cidade.");
+  const place = (await geocodeResponse.json())?.[0];
+  if (!place?.boundingbox || !place?.lat || !place?.lon) throw new Error("Cidade não encontrada no Brasil.");
+
+  let [south, north, west, east] = place.boundingbox.map((value: string) => Number(value));
+  const lat = Number(place.lat);
+  const lon = Number(place.lon);
+  if (Math.abs(north - south) > 2.5 || Math.abs(east - west) > 2.5) {
+    south = lat - 0.7;
+    north = lat + 0.7;
+    west = lon - 0.7;
+    east = lon + 0.7;
+  }
+
+  const bbox = `${south},${west},${north},${east}`;
+  const query = `[out:json][timeout:18];
+(
+  nwr["name"~"${MATCH_REGEX}",i](${bbox});
+  nwr["brand"~"${MATCH_REGEX}",i](${bbox});
+  nwr["description"~"${MATCH_REGEX}",i](${bbox});
+  nwr["club"~"swing|liberal",i](${bbox});
+);
+out center tags 30;`;
+
+  const overpassResponse = await fetch("https://overpass-api.de/api/interpreter", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `data=${encodeURIComponent(query)}`,
+  });
+  if (!overpassResponse.ok) throw new Error("Busca pública indisponível no momento.");
+  const elements = ((await overpassResponse.json()).elements ?? []) as Array<{
+    type: "node" | "way" | "relation";
+    id: number;
+    lat?: number;
+    lon?: number;
+    center?: { lat?: number; lon?: number };
+    tags?: Record<string, string>;
+  }>;
+
+  const seen = new Set<string>();
+  const results = elements.flatMap((element): SearchResult[] => {
+    const tags = element.tags ?? {};
+    const name = tags.name?.trim();
+    if (!name) return [];
+    const address = buildAddress(tags);
+    const key = `${name.toLowerCase()}-${address.toLowerCase()}`;
+    if (seen.has(key)) return [];
+    seen.add(key);
+    return [{
+      name,
+      category: tags.amenity ?? tags.leisure ?? tags.club ?? tags.tourism ?? "local",
+      address,
+      website: tags.website ?? tags["contact:website"],
+      phone: tags.phone ?? tags["contact:phone"],
+      lat: element.lat ?? element.center?.lat,
+      lon: element.lon ?? element.center?.lon,
+      source: "OpenStreetMap",
+      sourceUrl: `https://www.openstreetmap.org/${element.type}/${element.id}`,
+      whyMatched: "O nome ou a descrição pública contém termos relacionados à busca.",
+      confidence: "baixa",
+    }];
+  }).slice(0, 8);
+
+  return {
+    city: place.display_name,
+    summary: results.length ? `Encontrei ${results.length} resultado(s) público(s) possivelmente relacionado(s) a ${city}.` : `Não encontrei resultados públicos compatíveis para ${city}.`,
+    nextSteps: ["Confirme horários, regras e avaliações antes de visitar.", "Use apenas locais para maiores de 18 anos."],
+    sourceNote: "Busca em dados públicos do OpenStreetMap/Overpass.",
+    results,
+  };
+};
+
 const Search = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
