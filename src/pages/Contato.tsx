@@ -2,35 +2,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SexandoChat from "@/components/SexandoChat";
 import { Mail } from "lucide-react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-
-const FAQ = [
-  {
-    q: "O Sexando é gratuito?",
-    a: "Sim! Você pode usar o Sexando de graça com limites diários (10 mensagens, 1 post, 1 foto, 1 vídeo e 1 story por dia). O Premium libera tudo ilimitado e ainda mostra quem visitou seu perfil.",
-  },
-  {
-    q: "Como cancelo o Premium?",
-    a: "Em Minha Conta → Assinatura você consegue gerenciar. Se travar em algum passo, o suporte te ajuda: suporte@sexando.com.",
-  },
-  {
-    q: "Como funciona a certificação de perfil?",
-    a: "Você envia uma foto sua segurando um papel com um código que a gente gera. Nossa equipe revisa manualmente e libera o selo de perfil verificado. É gratuito.",
-  },
-  {
-    q: "Modo incógnito funciona mesmo?",
-    a: "Funciona! Quando ativado (exclusivo Premium), suas visitas a outros perfis simplesmente não são registradas — ninguém vê que você passou por lá.",
-  },
-  {
-    q: "Posso bloquear alguém?",
-    a: "Pode. O bloqueio é mútuo: remove amizade, follow e pedidos pendentes dos dois lados. É só ir no perfil da pessoa.",
-  },
-];
 
 const Contato = () => {
   return (
@@ -71,24 +42,6 @@ const Contato = () => {
         {/* Chat */}
         <SexandoChat />
 
-        {/* FAQ */}
-        <section className="max-w-3xl mx-auto mt-16">
-          <h2 className="text-2xl md:text-3xl font-light tracking-tight text-center mb-6">
-            Perguntas frequentes
-          </h2>
-          <div className="rounded-2xl border border-border bg-white/70 backdrop-blur-xl shadow-lg p-4 md:p-6">
-            <Accordion type="single" collapsible className="w-full">
-              {FAQ.map((item, i) => (
-                <AccordionItem key={i} value={`item-${i}`}>
-                  <AccordionTrigger className="text-left">{item.q}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    {item.a}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-        </section>
 
         {/* Contato humano */}
         <section className="max-w-3xl mx-auto mt-10">
