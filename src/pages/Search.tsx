@@ -29,7 +29,7 @@ type SearchResponse = {
   results: SearchResult[];
 };
 
-const SEARCH_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/wediet-chat?mode=search-venues`;
+const SEARCH_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/search-venues`;
 const CITY_SUGGESTIONS = ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Curitiba", "Porto Alegre", "Brasília"];
 
 const confidenceClass: Record<SearchResult["confidence"], string> = {
@@ -37,8 +37,6 @@ const confidenceClass: Record<SearchResult["confidence"], string> = {
   média: "border-border bg-secondary text-secondary-foreground",
   baixa: "border-border bg-muted text-muted-foreground",
 };
-
-const MATCH_REGEX = "swing|liberal|priv[eê]|casais|adult[oa]|sensual|fetiche|fetish|lifestyle";
 
 const buildAddress = (tags: Record<string, string>) =>
   [tags["addr:street"], tags["addr:housenumber"], tags["addr:suburb"], tags["addr:city"], tags["addr:state"]]
