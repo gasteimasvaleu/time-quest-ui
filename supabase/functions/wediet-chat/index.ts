@@ -112,6 +112,111 @@ Segurança: se houver dúvida sobre idade, diga que o Sexando é exclusivo +18. 
 
 Encaminhe para suporte@sexando.com em problemas de pagamento, cobrança, cancelamento, conta bloqueada/suspensa/excluída, denúncia grave, problemas técnicos persistentes ou dúvidas específicas de conta. Não invente preços, reembolso, prazos ou políticas não informadas.`;
 
+type OverpassElement = {
+  type: "node" | "way" | "relation";
+  id: number;
+  lat?: number;
+  lon?: number;
+  center?: { lat?: number; lon?: number };
+  tags?: Record<string, string>;
+};
+
+type Candidate = {
+  name: string;
+  category: string;
+  address: string;
+  website?: string;
+  phone?: string;
+  lat?: number;
+  lon?: number;
+  sourceUrl: string;
+  source: string;
+};
+
+type AiResult = {
+  summary: string;
+  nextSteps: string[];
+  items: { candidateIndex: number; whyMatched: string; confidence: "alta" | "média" | "baixa" }[];
+};
+
+const MATCH_REGEX = "swing|liberal|priv[eê]|casais|adult[oa]|sensual|fetiche|fetish|lifestyle";
+
+function json(data: unknown, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
+  });
+}
+
+function buildAddress(tags: Record<string, string>) {
+  return [tags["addr:street"], tags["addr:housenumber"], tags["addr:suburb"], tags["addr:city"], tags["addr:state"]]
+    .filter(Boolean)
+    .join(", ");
+}
+
+async function geocodeCity(city: string, state = "") {
+  const url = new URL("https://nominatim.openstreetmap.org/search");
+  url.searchParams.set("format", "jsonv2");
+  url.searchParams.set("addressdetails", "1");
+  url.searchParams.set("countrycodes", "br");
+  url.searchParams.set("limit", "1");
+  url.searchParams.set("q", `${city}${state ? `, ${state}` : ""}, Brasil`);
+
+  const response = await fetch(url, {
+    headers: {
+      "User-Agent": "SexandoSearch/1.0 (suporte@sexando.com)",
+      "Accept-Language": "pt-BR,pt;q=0.9",
+    },
+  });
+
+  if (!response.ok) throw new Error("Não foi possível localizar a cidade.");
+  const places = await response.json();
+  const place = places?.[0];
+  if (!place?.boundingbox || !place?.lat || !place?.lon) return null;
+
+  let [south, north, west, east] = place.boundingbox.map((value: string) => Number(value));
+  const lat = Number(place.lat);
+  const lon = Number(place.lon);
+
+  if (Math.abs(north - south) > 2.5 || Math.abs(east - west) > 2.5) {
+    south = lat - 0.7;
+    north = lat + 0.7;
+    west = lon - 0.7;
+    east = lon + 0.7;
+  }
+
+  return { label: place.display_name as string, bbox: `${south},${west},${north},${east}` };
+}
+
+async function fetchOverpass(bbox: string) {
+  const query = `[out:json][timeout:18];
+(
+  nwr["name"~"${MATCH_REGEX}",i](${bbox});
+  nwr["brand"~"${MATCH_REGEX}",i](${bbox});
+  nwr["description"~"${MATCH_REGEX}",i](${bbox});
+  nwr["club"~"swing|liberal",i](${bbox});
+);
+out center tags 60;`;
+  const endpoints = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"];
+  let lastError: unknown;
+
+  for (const endpoint of endpoints) {
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `data=${encodeURIComponent(query)}`,
+      });
+      if (!response.ok) throw new Error(`Overpass ${response.status}`);
+      return ((await response.json()).elements ?? []) as OverpassElement[];
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  throw lastError instanceof Error ? lastError : new Error("Busca pública indisponível.");
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
