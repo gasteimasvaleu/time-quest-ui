@@ -151,7 +151,13 @@ const Search = () => {
       if (!response.ok) throw new Error(payload?.error ?? "Não foi possível concluir a busca.");
       setData(payload);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Erro inesperado na busca.");
+      try {
+        const fallbackData = await searchPublicData(trimmedCity, state.trim());
+        setData(fallbackData);
+        toast.info("Busca feita por dados públicos enquanto a IA termina de atualizar.");
+      } catch (fallbackError) {
+        toast.error(fallbackError instanceof Error ? fallbackError.message : error instanceof Error ? error.message : "Erro inesperado na busca.");
+      }
     } finally {
       setIsLoading(false);
     }
