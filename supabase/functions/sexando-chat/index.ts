@@ -152,7 +152,7 @@ Sempre que fizer sentido, termine com um convite leve:
 - "Tem mais alguma dúvida?"`;
 
 Deno.serve(async (req) => {
-  // edge function: sexando-chat (assistente Sex) — v3 redeploy with config registration
+  // edge function: sexando-chat (assistente Sex) — v4 redeploy to register & publish function
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
