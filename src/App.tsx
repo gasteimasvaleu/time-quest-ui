@@ -11,6 +11,7 @@ import Precos from "./pages/Precos";
 import Obrigado from "./pages/Obrigado";
 import NotFound from "./pages/NotFound";
 import MobileApp from "./pages/MobileApp";
+import Search from "./pages/Search";
 import FloatingDock from "./components/FloatingDock";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/contato" element={<Contato />} />
           <Route path="/funcionalidades" element={<Funcionalidades />} />
           <Route path="/precos" element={<Precos />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/obrigado" element={<Obrigado />} />
           <Route path="/mobileapp" element={<MobileApp />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
