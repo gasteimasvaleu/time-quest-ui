@@ -183,8 +183,8 @@ const Search = () => {
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div className="space-y-6">
             <div className="space-y-4 text-center">
-              <h1 className="mx-auto max-w-3xl text-4xl font-bold leading-tight tracking-normal text-foreground md:text-6xl">
-                Encontre casas de swing por cidade
+              <h1 className="mx-auto max-w-3xl text-4xl font-light leading-tight tracking-tight text-foreground md:text-6xl">
+                Encontre <span className="italic font-serif text-accent">casas de swing</span> por cidade
               </h1>
               <p className="mx-auto max-w-2xl text-lg leading-8 text-muted-foreground">
                 A IA consulta dados públicos, organiza possíveis locais liberais no Brasil e mostra fontes para você conferir antes de visitar.
