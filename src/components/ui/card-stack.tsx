@@ -143,13 +143,13 @@ export function CardStack<T extends CardStackItem>({
 
   return (
     <div
-      className={cn("w-full overflow-x-hidden", className)}
+      className={cn("w-full overflow-hidden", className)}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
       <div
-        className="relative w-full overflow-x-hidden"
-        style={{ height: Math.max(isMobile ? 280 : 380, effCardHeight + 80), touchAction: "pan-y" }}
+        className="relative w-full overflow-hidden pb-14 md:pb-20"
+        style={{ height: Math.max(isMobile ? 320 : 450, effCardHeight + (isMobile ? 120 : 150)), touchAction: "pan-y" }}
         tabIndex={0}
         onKeyDown={onKeyDown}
       >
@@ -163,7 +163,7 @@ export function CardStack<T extends CardStackItem>({
         />
 
         <div
-          className="absolute inset-0 flex items-end justify-center"
+          className="absolute inset-0 flex items-end justify-center pb-14 md:pb-20"
           style={{ perspective: `${perspectivePx}px` }}
         >
           <AnimatePresence initial={false}>
