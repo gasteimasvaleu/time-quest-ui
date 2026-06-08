@@ -1,14 +1,7 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-} from "@/components/ui/dialog";
 
 const Hero = () => {
-  const [videoModalOpen, setVideoModalOpen] = useState(false);
-
   return (
     <section className="bg-background px-4 py-4 md:min-h-screen md:py-10 md:px-8">
       <div className="mx-auto max-w-7xl">
@@ -60,30 +53,17 @@ const Hero = () => {
                   Criar Conta Grátis
                 </Button>
               </a>
-              <Button 
-                size="lg" 
-                variant="outline"
-                onClick={() => setVideoModalOpen(true)}
-                className="border-2 border-foreground bg-transparent text-foreground hover:bg-foreground hover:text-background transition-all hover:scale-105"
-              >
-                <Play className="mr-2 h-5 w-5" />
-                Ver Como Funciona
-              </Button>
+              <a href="https://app.sexando.com">
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="border-2 border-foreground bg-transparent text-foreground hover:bg-foreground hover:text-background transition-all hover:scale-105"
+                >
+                  <Play className="mr-2 h-5 w-5" />
+                  Ver Como Funciona
+                </Button>
+              </a>
             </div>
-
-            {/* Video Demo Modal */}
-            <Dialog open={videoModalOpen} onOpenChange={setVideoModalOpen}>
-              <DialogContent className="sm:max-w-md p-0 bg-black border-none overflow-hidden">
-                <div className="aspect-[9/16] w-full max-h-[80vh]">
-                  <video
-                    src="https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/0409.mp4"
-                    controls
-                    autoPlay
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              </DialogContent>
-            </Dialog>
           </div>
 
         </div>
