@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { Building2, ExternalLink, Loader2, MapPin, Navigation, Phone, Search as SearchIcon, ShieldCheck, Sparkles } from "lucide-react";
+import { Building2, ExternalLink, Loader2, MapPin, Navigation, Phone, Search as SearchIcon, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 
 type SearchResult = {
