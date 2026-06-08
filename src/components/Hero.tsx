@@ -13,15 +13,26 @@ const Hero = () => {
     <section className="bg-background px-4 py-4 md:min-h-screen md:py-10 md:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Hero Container with rounded background */}
-        <div 
-          className="relative overflow-hidden rounded-[40px] px-6 py-8 md:px-12 md:py-12 border border-gray-200"
-          style={{
-            backgroundImage: 'url(https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/background.png)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          }}
-        >
+        <div className="relative overflow-hidden rounded-[40px] px-6 py-8 md:px-12 md:py-12 border border-gray-200">
+          {/* Mobile background */}
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden"
+            style={{
+              backgroundImage:
+                'url(https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/02178092594837833f1a7c43c44499172059af1828f594338fe75_0.jpeg)',
+            }}
+          />
+          {/* Desktop background */}
+          <div
+            className="absolute inset-0 hidden bg-cover bg-center bg-no-repeat md:block"
+            style={{
+              backgroundImage:
+                'url(https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/021780925956717a2f4933af3443b601e52f5659e0d958f9b07de_0.jpeg)',
+            }}
+          />
+          {/* Transparency overlay for text legibility */}
+          <div className="absolute inset-0 bg-white/70" />
+
           {/* Main Hero Content */}
           <div className="relative z-10 mx-auto max-w-4xl text-center">
 
