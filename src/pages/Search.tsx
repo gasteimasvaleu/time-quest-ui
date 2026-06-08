@@ -29,7 +29,7 @@ type SearchResponse = {
   results: SearchResult[];
 };
 
-const SEARCH_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/search-venues`;
+const SEARCH_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/wediet-chat?mode=search-venues`;
 const CITY_SUGGESTIONS = ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Curitiba", "Porto Alegre", "Brasília"];
 
 const confidenceClass: Record<SearchResult["confidence"], string> = {
