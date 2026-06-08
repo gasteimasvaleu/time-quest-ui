@@ -38,6 +38,101 @@ const confidenceClass: Record<SearchResult["confidence"], string> = {
   baixa: "border-border bg-muted text-muted-foreground",
 };
 
+const buildAddress = (tags: Record<string, string>) =>
+  [tags["addr:street"], tags["addr:housenumber"], tags["addr:suburb"], tags["addr:city"], tags["addr:state"]]
+    .filter(Boolean)
+    .join(", ");
+
+const searchPublicData = async (city: string, state: string): Promise<SearchResponse> => {
+  const geocodeUrl = new URL("https://nominatim.openstreetmap.org/search");
+  geocodeUrl.searchParams.set("format", "jsonv2");
+  geocodeUrl.searchParams.set("addressdetails", "1");
+  geocodeUrl.searchParams.set("countrycodes", "br");
+  geocodeUrl.searchParams.set("limit", "1");
+  geocodeUrl.searchParams.set("q", `${city}${state ? `, ${state}` : ""}, Brasil`);
+
+  const geocodeResponse = await fetch(geocodeUrl, { headers: { "Accept-Language": "pt-BR,pt;q=0.9" } });
+  if (!geocodeResponse.ok) throw new Error("Não foi possível localizar a cidade.");
+  const place = (await geocodeResponse.json())?.[0];
+  if (!place?.boundingbox || !place?.lat || !place?.lon) throw new Error("Cidade não encontrada no Brasil.");
+
+  let [south, north, west, east] = place.boundingbox.map((value: string) => Number(value));
+  const lat = Number(place.lat);
+  const lon = Number(place.lon);
+  if (Math.abs(north - south) > 2.5 || Math.abs(east - west) > 2.5) {
+    south = lat - 0.7;
+    north = lat + 0.7;
+    west = lon - 0.7;
+    east = lon + 0.7;
+  }
+
+  const terms = ["swing", "clube liberal", "casa liberal", "privê", "adulto"];
+  const searches = await Promise.all(
+    terms.map(async (term) => {
+      const url = new URL("https://nominatim.openstreetmap.org/search");
+      url.searchParams.set("format", "jsonv2");
+      url.searchParams.set("addressdetails", "1");
+      url.searchParams.set("extratags", "1");
+      url.searchParams.set("namedetails", "1");
+      url.searchParams.set("countrycodes", "br");
+      url.searchParams.set("limit", "8");
+      url.searchParams.set("bounded", "1");
+      url.searchParams.set("viewbox", `${west},${north},${east},${south}`);
+      url.searchParams.set("q", `${term} ${city}${state ? ` ${state}` : ""} Brasil`);
+      const response = await fetch(url, { headers: { "Accept-Language": "pt-BR,pt;q=0.9" } });
+      return response.ok ? response.json() : [];
+    }),
+  );
+
+  const elements = searches.flat() as Array<{
+    place_id: number;
+    osm_type?: string;
+    osm_id?: number;
+    lat?: string;
+    lon?: string;
+    name?: string;
+    display_name?: string;
+    class?: string;
+    type?: string;
+    namedetails?: Record<string, string>;
+    extratags?: Record<string, string>;
+  }>;
+
+  const seen = new Set<string>();
+  const results = elements.flatMap((element): SearchResult[] => {
+    const tags = element.extratags ?? {};
+    const name = (element.namedetails?.name ?? element.name ?? element.display_name?.split(",")?.[0])?.trim();
+    if (!name) return [];
+    const address = element.display_name ?? buildAddress(tags);
+    const key = `${name.toLowerCase()}-${address.toLowerCase()}`;
+    if (seen.has(key)) return [];
+    seen.add(key);
+    const osmType = element.osm_type === "N" ? "node" : element.osm_type === "W" ? "way" : element.osm_type === "R" ? "relation" : element.osm_type;
+    const matchedText = `${name} ${address}`.toLowerCase();
+    return [{
+      name,
+      category: element.type ?? element.class ?? "local",
+      address,
+      website: tags.website ?? tags["contact:website"],
+      phone: tags.phone ?? tags["contact:phone"],
+      lat: element.lat ? Number(element.lat) : undefined,
+      lon: element.lon ? Number(element.lon) : undefined,
+      source: "OpenStreetMap",
+      sourceUrl: osmType && element.osm_id ? `https://www.openstreetmap.org/${osmType}/${element.osm_id}` : `https://www.openstreetmap.org/search?query=${encodeURIComponent(name)}`,
+      whyMatched: "Resultado público encontrado por termos relacionados à busca na cidade escolhida.",
+      confidence: /swing|liberal|priv[eê]/i.test(matchedText) ? "média" : "baixa",
+    }];
+  }).slice(0, 8);
+
+  return {
+    city: place.display_name,
+    summary: results.length ? `Encontrei ${results.length} resultado(s) público(s) possivelmente relacionado(s) a ${city}.` : `Não encontrei resultados públicos compatíveis para ${city}.`,
+    nextSteps: ["Confirme horários, regras e avaliações antes de visitar.", "Use apenas locais para maiores de 18 anos."],
+    sourceNote: "Busca em dados públicos do OpenStreetMap/Overpass.",
+    results,
+  };
+};
+
 const Search = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -63,7 +158,13 @@ const Search = () => {
       if (!response.ok) throw new Error(payload?.error ?? "Não foi possível concluir a busca.");
       setData(payload);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Erro inesperado na busca.");
+      try {
+        const fallbackData = await searchPublicData(trimmedCity, state.trim());
+        setData(fallbackData);
+        toast.info("Busca feita por dados públicos enquanto a IA termina de atualizar.");
+      } catch (fallbackError) {
+        toast.error(fallbackError instanceof Error ? fallbackError.message : error instanceof Error ? error.message : "Erro inesperado na busca.");
+      }
     } finally {
       setIsLoading(false);
     }
