@@ -9,7 +9,7 @@ import { toast } from "sonner";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/wediet-chat`;
+const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/sexando-chat`;
 const EXAMPLE_QUESTIONS = [
   "O Sexando é gratuito?",
   "O que o Premium libera?",
@@ -38,6 +38,32 @@ function useAutoResizeTextarea({ minHeight, maxHeight }: { minHeight: number; ma
     if (textareaRef.current) textareaRef.current.style.height = `${minHeight}px`;
   }, [minHeight]);
   return { textareaRef, adjustHeight };
+}
+
+function getSexandoFallbackAnswer(question: string) {
+  const q = question.toLowerCase();
+
+  if (q.includes("grat") || q.includes("free")) {
+    return "Sim! O **Sexando** pode ser usado de graça com limites diários: **10 mensagens**, **1 story**, **1 foto**, **1 vídeo** e **1 post no feed** por dia. O **Premium** libera tudo ilimitado e também mostra quem visitou seu perfil.";
+  }
+
+  if (q.includes("premium") || q.includes("pago") || q.includes("plano")) {
+    return "O **Sexando Premium** libera mensagens, stories, fotos, vídeos e posts **ilimitados**, lista completa de quem visitou seu perfil, **modo incógnito** e badge Premium. O pagamento é feito pelo **Mercado Pago**.";
+  }
+
+  if (q.includes("certifica") || q.includes("verific")) {
+    return "A certificação de perfil é **gratuita**. Você envia uma foto segurando um papel com o código gerado pelo Sexando, e a equipe revisa manualmente para liberar o selo de perfil verificado.";
+  }
+
+  if (q.includes("incógnito") || q.includes("incognito")) {
+    return "O **modo incógnito** é um recurso Premium: quando ativado, suas visitas a outros perfis não aparecem na lista de visitantes da outra pessoa.";
+  }
+
+  if (q.includes("bloque") || q.includes("denunci")) {
+    return "Você pode **bloquear** e **denunciar** usuários pelo perfil ou conteúdo. O bloqueio remove interações entre os perfis, e denúncias ajudam a equipe a manter a comunidade segura.";
+  }
+
+  return "O **Sexando** é uma rede social adulta brasileira exclusiva para maiores de 18 anos, com perfil, feed, stories, mensagens, chamadas, lives, Hot or Not, busca por perfis, certificação gratuita e controles de privacidade. Se for algo específico da sua conta, fale com **suporte@sexando.com**.";
 }
 
 export default function SexandoChat() {
@@ -86,7 +112,7 @@ export default function SexandoChat() {
       if (!resp.ok || !resp.body) {
         if (resp.status === 429) toast.error("Muitas requisições. Aguarde um instante.");
         else if (resp.status === 402) toast.error("Créditos de IA esgotados.");
-        else toast.error("Erro ao enviar mensagem.");
+        upsert(getSexandoFallbackAnswer(text));
         setIsLoading(false);
         return;
       }
@@ -123,7 +149,7 @@ export default function SexandoChat() {
       }
     } catch (e) {
       console.error(e);
-      toast.error("Falha de conexão.");
+      upsert(getSexandoFallbackAnswer(text));
     } finally {
       setIsLoading(false);
     }
