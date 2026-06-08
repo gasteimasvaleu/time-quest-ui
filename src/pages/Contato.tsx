@@ -24,7 +24,7 @@ const Contato = () => {
               style={{ animationDelay: "2s" }}
             />
             <img
-              src="https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/image_1779996034897_61627144.png"
+              src="https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/cubo.png"
               alt="Wediet"
               className="relative z-10 h-full w-full object-contain [animation:float_3s_ease-in-out_infinite,pink-pulse_2s_ease-in-out_infinite] transition-transform duration-300 hover:scale-110 hover:rotate-3"
             />
