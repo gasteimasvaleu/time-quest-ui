@@ -26,7 +26,7 @@ const Contato = () => {
               style={{ animationDelay: "2s" }}
             />
             <img
-              src="https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/logonav.png"
+              src="https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/cubo.png"
               alt="Sexando"
               className="relative z-10 h-full w-full object-contain [animation:float_3s_ease-in-out_infinite,pink-pulse_2s_ease-in-out_infinite] transition-transform duration-300 hover:scale-110"
             />
