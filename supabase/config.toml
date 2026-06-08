@@ -1,1 +1,7 @@
 project_id = "lbwjszdpjkxbihdwjaqt"
+
+[functions.wediet-chat]
+verify_jwt = false
+
+[functions.sexando-chat]
+verify_jwt = false
