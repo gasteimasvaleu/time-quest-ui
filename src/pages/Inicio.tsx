@@ -44,7 +44,7 @@ const Inicio = () => {
   return (
     <main>
       <Navbar />
-      <section className="max-w-7xl mx-auto px-4 pt-4 pb-24 md:pt-6 md:pb-32">
+      <section className="max-w-7xl mx-auto px-4 pt-4 pb-16 md:pt-6 md:pb-24">
         <CardStack items={PLACEHOLDER_ITEMS} />
       </section>
       <Footer />
