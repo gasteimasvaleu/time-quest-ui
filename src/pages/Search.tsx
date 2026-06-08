@@ -182,16 +182,11 @@ const Search = () => {
       <section className="mx-auto max-w-7xl px-4 py-10 md:px-8 md:py-16">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
-              <Sparkles className="h-4 w-4" />
-              Busca com IA para adultos 18+
-            </div>
-
-            <div className="space-y-4">
-              <h1 className="max-w-3xl text-4xl font-bold leading-tight tracking-normal text-foreground md:text-6xl">
+            <div className="space-y-4 text-center">
+              <h1 className="mx-auto max-w-3xl text-4xl font-bold leading-tight tracking-normal text-foreground md:text-6xl">
                 Encontre casas de swing por cidade
               </h1>
-              <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
+              <p className="mx-auto max-w-2xl text-lg leading-8 text-muted-foreground">
                 A IA consulta dados públicos, organiza possíveis locais liberais no Brasil e mostra fontes para você conferir antes de visitar.
               </p>
             </div>
