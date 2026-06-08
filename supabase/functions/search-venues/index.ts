@@ -1,25 +1,9 @@
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
-import { generateObject } from "npm:ai";
-import { createOpenAICompatible } from "npm:@ai-sdk/openai-compatible";
 import { z } from "npm:zod";
 
 const BodySchema = z.object({
   city: z.string().trim().min(2).max(80),
   state: z.string().trim().max(30).optional(),
-});
-
-const AiSchema = z.object({
-  summary: z.string(),
-  nextSteps: z.array(z.string()).max(4),
-  items: z
-    .array(
-      z.object({
-        candidateIndex: z.number(),
-        whyMatched: z.string(),
-        confidence: z.enum(["alta", "média", "baixa"]),
-      }),
-    )
-    .max(8),
 });
 
 type OverpassElement = {
@@ -163,7 +147,27 @@ function toCandidates(elements: OverpassElement[]) {
   return candidates.slice(0, 12);
 }
 
-async function rankWithAi(city: string, placeLabel: string, candidates: Candidate[]) {
+type AiResult = {
+  summary: string;
+  nextSteps: string[];
+  items: { candidateIndex: number; whyMatched: string; confidence: "alta" | "média" | "baixa" }[];
+};
+
+function fallbackAi(city: string, candidates: Candidate[]): AiResult {
+  return {
+    summary: candidates.length
+      ? `Encontrei ${candidates.length} resultado(s) público(s) possivelmente relacionado(s) a ${city}.`
+      : `Não encontrei resultados públicos compatíveis para ${city}.`,
+    nextSteps: ["Confirme horários, regras e avaliações antes de visitar.", "Use apenas locais para maiores de 18 anos."],
+    items: candidates.map((_, candidateIndex) => ({
+      candidateIndex,
+      whyMatched: "O nome ou a descrição pública contém termos relacionados à busca.",
+      confidence: "baixa" as const,
+    })),
+  };
+}
+
+async function rankWithAi(city: string, placeLabel: string, candidates: Candidate[]): Promise<AiResult> {
   if (candidates.length === 0) {
     return {
       summary: `Não encontrei resultados públicos compatíveis para ${city}.`,
@@ -173,35 +177,49 @@ async function rankWithAi(city: string, placeLabel: string, candidates: Candidat
   }
 
   const key = Deno.env.get("LOVABLE_API_KEY");
-  if (!key) throw new Error("LOVABLE_API_KEY não configurado");
+  if (!key) return fallbackAi(city, candidates);
 
-  const gateway = createOpenAICompatible({
-    name: "lovable-ai",
-    baseURL: "https://ai.gateway.lovable.dev/v1",
-    headers: { "Lovable-API-Key": key },
-  });
+  const prompt = `Você organiza resultados de busca públicos para adultos +18. Use somente os candidatos fornecidos, não invente nomes, endereços, telefones nem links. Não escreva conteúdo sexual explícito.
 
-  const { object } = await generateObject({
-    model: gateway("google/gemini-3-flash-preview"),
-    schema: AiSchema,
-    system:
-      "Você organiza resultados de busca públicos para adultos +18. Use somente os candidatos fornecidos, não invente nomes, endereços, telefones nem links. Não escreva conteúdo sexual explícito.",
-    prompt: JSON.stringify({
-      city,
-      placeLabel,
-      candidates: candidates.map((candidate, index) => ({
-        index,
-        name: candidate.name,
-        category: candidate.category,
-        address: candidate.address,
-        hasWebsite: Boolean(candidate.website),
-        hasPhone: Boolean(candidate.phone),
-      })),
-      task: "Selecione e ordene até 8 candidatos mais relevantes para casas de swing, clubes liberais ou locais adultos consensuais. Explique o motivo de cada correspondência em português do Brasil.",
-    }),
-  });
+Cidade: ${city} (${placeLabel})
+Candidatos:
+${candidates
+    .map(
+      (c, i) =>
+        `${i}. ${c.name} | categoria: ${c.category} | endereço: ${c.address || "n/d"} | site: ${c.website ? "sim" : "não"} | telefone: ${c.phone ? "sim" : "não"}`,
+    )
+    .join("\n")}
 
-  return object;
+Selecione e ordene até 8 candidatos mais relevantes para casas de swing, clubes liberais ou locais adultos consensuais.
+Responda APENAS em JSON válido neste formato:
+{"summary":"texto","nextSteps":["passo1","passo2"],"items":[{"candidateIndex":0,"whyMatched":"motivo","confidence":"alta|média|baixa"}]}`;
+
+  try {
+    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Lovable-API-Key": key },
+      body: JSON.stringify({
+        model: "google/gemini-2.5-flash",
+        messages: [{ role: "user", content: prompt }],
+        response_format: { type: "json_object" },
+      }),
+    });
+
+    if (!response.ok) {
+      console.error("gateway error", response.status, await response.text());
+      return fallbackAi(city, candidates);
+    }
+
+    const data = await response.json();
+    const content = data?.choices?.[0]?.message?.content;
+    if (!content) return fallbackAi(city, candidates);
+    const parsed = JSON.parse(content) as AiResult;
+    if (!Array.isArray(parsed.items)) return fallbackAi(city, candidates);
+    return parsed;
+  } catch (error) {
+    console.error("rankWithAi error", error);
+    return fallbackAi(city, candidates);
+  }
 }
 
 Deno.serve(async (req) => {
@@ -217,23 +235,7 @@ Deno.serve(async (req) => {
     if (!place) return json({ error: "Cidade não encontrada no Brasil." }, 404);
 
     const candidates = toCandidates(await fetchOverpass(place.bbox));
-    let ai;
-    try {
-      ai = await rankWithAi(city, place.label, candidates);
-    } catch (error) {
-      console.error("search-venues ai fallback", error);
-      ai = {
-        summary: candidates.length
-          ? `Encontrei ${candidates.length} resultado(s) público(s) possivelmente relacionado(s) a ${city}.`
-          : `Não encontrei resultados públicos compatíveis para ${city}.`,
-        nextSteps: ["Confirme horários, regras e avaliações antes de visitar.", "Use apenas locais para maiores de 18 anos."],
-        items: candidates.map((_, candidateIndex) => ({
-          candidateIndex,
-          whyMatched: "O nome ou a descrição pública contém termos relacionados à busca.",
-          confidence: "baixa" as const,
-        })),
-      };
-    }
+    const ai = await rankWithAi(city, place.label, candidates);
 
     const results = ai.items
       .map((item) => {
