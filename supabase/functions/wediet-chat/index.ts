@@ -1,3 +1,4 @@
+// v5 redeploy: enable sexando assistant branch
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 
 const SYSTEM_PROMPT = `Você é o assistente oficial do Wediet (we diet), um super app brasileiro que une nutrição, treino, finanças, maternidade, comunidade e marketplace local, com IA em toda parte.
