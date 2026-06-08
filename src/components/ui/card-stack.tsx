@@ -149,7 +149,7 @@ export function CardStack<T extends CardStackItem>({
     >
       <div
         className="relative w-full overflow-hidden pb-14 md:pb-20"
-        style={{ height: Math.max(isMobile ? 320 : 450, effCardHeight + (isMobile ? 120 : 150)), touchAction: "pan-y" }}
+        style={{ height: Math.max(isMobile ? 240 : 360, effCardHeight + (isMobile ? 70 : 90)), touchAction: "pan-y" }}
         tabIndex={0}
         onKeyDown={onKeyDown}
       >
