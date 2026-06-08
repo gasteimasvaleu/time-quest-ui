@@ -78,7 +78,7 @@ const Navbar = () => {
 
           <div className="flex items-center gap-3">
             <div className="hidden md:inline-block">
-              <AnimatedDownloadButton href="#" label="Cadastrar" />
+              <AnimatedDownloadButton href="https://app.sexando.com/signup" label="Cadastrar" />
             </div>
             <div className="md:hidden">
               <AnimatedDownloadButton href="#" label="Entrar" expandedWidth={150} />
