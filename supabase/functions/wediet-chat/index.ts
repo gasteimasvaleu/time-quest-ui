@@ -217,12 +217,136 @@ out center tags 60;`;
   throw lastError instanceof Error ? lastError : new Error("Busca pública indisponível.");
 }
 
+function toCandidates(elements: OverpassElement[]) {
+  const seen = new Set<string>();
+  const candidates: Candidate[] = [];
+
+  for (const element of elements) {
+    const tags = element.tags ?? {};
+    const name = tags.name?.trim();
+    if (!name) continue;
+
+    const address = buildAddress(tags);
+    const key = `${name.toLowerCase()}-${address.toLowerCase()}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    candidates.push({
+      name,
+      category: tags.amenity ?? tags.leisure ?? tags.club ?? tags.tourism ?? "local",
+      address,
+      website: tags.website ?? tags["contact:website"],
+      phone: tags.phone ?? tags["contact:phone"],
+      lat: element.lat ?? element.center?.lat,
+      lon: element.lon ?? element.center?.lon,
+      source: "OpenStreetMap",
+      sourceUrl: `https://www.openstreetmap.org/${element.type}/${element.id}`,
+    });
+  }
+
+  return candidates.slice(0, 12);
+}
+
+function fallbackAi(city: string, candidates: Candidate[]): AiResult {
+  return {
+    summary: candidates.length
+      ? `Encontrei ${candidates.length} resultado(s) público(s) possivelmente relacionado(s) a ${city}.`
+      : `Não encontrei resultados públicos compatíveis para ${city}.`,
+    nextSteps: ["Confirme horários, regras e avaliações antes de visitar.", "Use apenas locais para maiores de 18 anos."],
+    items: candidates.map((_, candidateIndex) => ({
+      candidateIndex,
+      whyMatched: "O nome ou a descrição pública contém termos relacionados à busca.",
+      confidence: "baixa" as const,
+    })),
+  };
+}
+
+async function rankWithAi(city: string, placeLabel: string, candidates: Candidate[]): Promise<AiResult> {
+  if (candidates.length === 0) {
+    return {
+      summary: `Não encontrei resultados públicos compatíveis para ${city}.`,
+      nextSteps: ["Tente buscar por uma cidade maior próxima.", "Confira redes sociais e avaliações antes de visitar."],
+      items: [],
+    };
+  }
+
+  const key = Deno.env.get("LOVABLE_API_KEY");
+  if (!key) return fallbackAi(city, candidates);
+
+  const prompt = `Você organiza resultados de busca públicos para adultos +18. Use somente os candidatos fornecidos, não invente nomes, endereços, telefones nem links. Não escreva conteúdo sexual explícito.
+
+Cidade: ${city} (${placeLabel})
+Candidatos:
+${candidates.map((c, i) => `${i}. ${c.name} | categoria: ${c.category} | endereço: ${c.address || "n/d"} | site: ${c.website ? "sim" : "não"} | telefone: ${c.phone ? "sim" : "não"}`).join("\n")}
+
+Selecione e ordene até 8 candidatos mais relevantes para casas de swing, clubes liberais ou locais adultos consensuais.
+Responda APENAS em JSON válido neste formato:
+{"summary":"texto","nextSteps":["passo1","passo2"],"items":[{"candidateIndex":0,"whyMatched":"motivo","confidence":"alta|média|baixa"}]}`;
+
+  try {
+    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Lovable-API-Key": key },
+      body: JSON.stringify({
+        model: "google/gemini-3-flash-preview",
+        messages: [{ role: "user", content: prompt }],
+        response_format: { type: "json_object" },
+      }),
+    });
+
+    if (!response.ok) return fallbackAi(city, candidates);
+    const content = (await response.json())?.choices?.[0]?.message?.content;
+    if (!content) return fallbackAi(city, candidates);
+    const parsed = JSON.parse(content) as AiResult;
+    return Array.isArray(parsed.items) ? parsed : fallbackAi(city, candidates);
+  } catch (error) {
+    console.error("rankWithAi error", error);
+    return fallbackAi(city, candidates);
+  }
+}
+
+async function handleSearchVenues(req: Request) {
+  try {
+    const body = await req.json();
+    const city = String(body.city ?? "").trim().slice(0, 80);
+    const state = String(body.state ?? "").trim().slice(0, 30);
+    if (city.length < 2) return json({ error: "Informe uma cidade válida." }, 400);
+
+    const place = await geocodeCity(city, state);
+    if (!place) return json({ error: "Cidade não encontrada no Brasil." }, 404);
+
+    const candidates = toCandidates(await fetchOverpass(place.bbox));
+    const ai = await rankWithAi(city, place.label, candidates);
+    const results = ai.items
+      .map((item) => {
+        const candidate = candidates[item.candidateIndex];
+        return candidate ? { ...candidate, whyMatched: item.whyMatched, confidence: item.confidence } : null;
+      })
+      .filter(Boolean);
+
+    return json({
+      city: place.label,
+      summary: ai.summary,
+      nextSteps: ai.nextSteps,
+      sourceNote: "Busca em dados públicos do OpenStreetMap/Overpass, organizada por Lovable AI.",
+      results,
+      searchedAt: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error("search venues fallback error", error);
+    return json({ error: error instanceof Error ? error.message : "Erro inesperado na busca." }, 500);
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
 
   try {
+    const url = new URL(req.url);
+    if (url.searchParams.get("mode") === "search-venues") return handleSearchVenues(req);
+
     const { assistant, messages } = await req.json();
     const systemPrompt = assistant === "sexando" ? SEXANDO_SYSTEM_PROMPT : SYSTEM_PROMPT;
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
