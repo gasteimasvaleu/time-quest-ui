@@ -9,7 +9,7 @@ import { toast } from "sonner";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/sexando-chat`;
+const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/wediet-chat`;
 const EXAMPLE_QUESTIONS = [
   "O Sexando é gratuito?",
   "O que o Premium libera?",
@@ -80,7 +80,7 @@ export default function SexandoChat() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
         },
-        body: JSON.stringify({ messages: next }),
+        body: JSON.stringify({ assistant: "sexando", messages: next }),
       });
 
       if (!resp.ok || !resp.body) {
