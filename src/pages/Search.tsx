@@ -68,52 +68,61 @@ const searchPublicData = async (city: string, state: string): Promise<SearchResp
     east = lon + 0.7;
   }
 
-  const bbox = `${south},${west},${north},${east}`;
-  const query = `[out:json][timeout:18];
-(
-  nwr["name"~"${MATCH_REGEX}",i](${bbox});
-  nwr["brand"~"${MATCH_REGEX}",i](${bbox});
-  nwr["description"~"${MATCH_REGEX}",i](${bbox});
-  nwr["club"~"swing|liberal",i](${bbox});
-);
-out center tags 30;`;
+  const terms = ["swing", "clube liberal", "casa liberal", "privê", "adulto"];
+  const searches = await Promise.all(
+    terms.map(async (term) => {
+      const url = new URL("https://nominatim.openstreetmap.org/search");
+      url.searchParams.set("format", "jsonv2");
+      url.searchParams.set("addressdetails", "1");
+      url.searchParams.set("extratags", "1");
+      url.searchParams.set("namedetails", "1");
+      url.searchParams.set("countrycodes", "br");
+      url.searchParams.set("limit", "8");
+      url.searchParams.set("bounded", "1");
+      url.searchParams.set("viewbox", `${west},${north},${east},${south}`);
+      url.searchParams.set("q", `${term} ${city}${state ? ` ${state}` : ""} Brasil`);
+      const response = await fetch(url, { headers: { "Accept-Language": "pt-BR,pt;q=0.9" } });
+      return response.ok ? response.json() : [];
+    }),
+  );
 
-  const overpassResponse = await fetch("https://overpass-api.de/api/interpreter", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `data=${encodeURIComponent(query)}`,
-  });
-  if (!overpassResponse.ok) throw new Error("Busca pública indisponível no momento.");
-  const elements = ((await overpassResponse.json()).elements ?? []) as Array<{
-    type: "node" | "way" | "relation";
-    id: number;
-    lat?: number;
-    lon?: number;
-    center?: { lat?: number; lon?: number };
-    tags?: Record<string, string>;
+  const elements = searches.flat() as Array<{
+    place_id: number;
+    osm_type?: string;
+    osm_id?: number;
+    lat?: string;
+    lon?: string;
+    name?: string;
+    display_name?: string;
+    class?: string;
+    type?: string;
+    namedetails?: Record<string, string>;
+    extratags?: Record<string, string>;
   }>;
 
   const seen = new Set<string>();
   const results = elements.flatMap((element): SearchResult[] => {
-    const tags = element.tags ?? {};
-    const name = tags.name?.trim();
+    const tags = element.extratags ?? {};
+    const name = (element.namedetails?.name ?? element.name ?? element.display_name?.split(",")?.[0])?.trim();
     if (!name) return [];
-    const address = buildAddress(tags);
+    const address = element.display_name ?? buildAddress(tags);
     const key = `${name.toLowerCase()}-${address.toLowerCase()}`;
     if (seen.has(key)) return [];
     seen.add(key);
+    const osmType = element.osm_type === "N" ? "node" : element.osm_type === "W" ? "way" : element.osm_type === "R" ? "relation" : element.osm_type;
+    const matchedText = `${name} ${address}`.toLowerCase();
     return [{
       name,
-      category: tags.amenity ?? tags.leisure ?? tags.club ?? tags.tourism ?? "local",
+      category: element.type ?? element.class ?? "local",
       address,
       website: tags.website ?? tags["contact:website"],
       phone: tags.phone ?? tags["contact:phone"],
-      lat: element.lat ?? element.center?.lat,
-      lon: element.lon ?? element.center?.lon,
+      lat: element.lat ? Number(element.lat) : undefined,
+      lon: element.lon ? Number(element.lon) : undefined,
       source: "OpenStreetMap",
-      sourceUrl: `https://www.openstreetmap.org/${element.type}/${element.id}`,
-      whyMatched: "O nome ou a descrição pública contém termos relacionados à busca.",
-      confidence: "baixa",
+      sourceUrl: osmType && element.osm_id ? `https://www.openstreetmap.org/${osmType}/${element.osm_id}` : `https://www.openstreetmap.org/search?query=${encodeURIComponent(name)}`,
+      whyMatched: "Resultado público encontrado por termos relacionados à busca na cidade escolhida.",
+      confidence: /swing|liberal|priv[eê]/i.test(matchedText) ? "média" : "baixa",
     }];
   }).slice(0, 8);
 
