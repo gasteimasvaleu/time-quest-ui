@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Heart, Shield, Users, MapPin, MessageCircle, Sparkles } from "lucide-react";
+import HyperTextParagraph from "@/components/HyperTextParagraph";
 
 const values = [
   {
@@ -64,16 +65,14 @@ const Sobre = () => {
             <h2 className="text-3xl md:text-4xl font-light tracking-tight">
               Nossa missão é <span className="text-[hsl(330_100%_50%)]">conectar</span> pessoas reais
             </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Acreditamos que todos merecem um espaço seguro para explorar suas conexões. 
-              A Sexando foi criada para remover o tabu e oferecer uma experiência moderna, 
-              discreta e 100% brasileira para quem vive ou quer conhecer o universo liberal.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Com perfis verificados, privacidade garantida e uma comunidade ativa em todo o Brasil, 
-              facilitamos encontros entre pessoas com os mesmos interesses — seja para uma noite, 
-              uma amizade ou algo mais.
-            </p>
+            <HyperTextParagraph
+              text="Acreditamos que todos merecem um espaço seguro para explorar suas conexões. A Sexando foi criada para remover o tabu e oferecer uma experiência moderna, discreta e 100% brasileira para quem vive ou quer conhecer o universo liberal."
+              highlightWords={["seguro", "conexões", "Sexando", "brasileira", "liberal"]}
+            />
+            <HyperTextParagraph
+              text="Com perfis verificados, privacidade garantida e uma comunidade ativa em todo o Brasil, facilitamos encontros entre pessoas com os mesmos interesses — seja para uma noite, uma amizade ou algo mais."
+              highlightWords={["verificados", "privacidade", "comunidade", "encontros"]}
+            />
           </div>
         </section>
 
