@@ -80,34 +80,39 @@ const Sobre = () => {
 
         {/* Values */}
         <section className="bg-secondary/30 py-16 md:py-24">
-          <div className="max-w-3xl mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-light tracking-tight mb-4">
-                O que nos <span className="text-[hsl(330_100%_50%)]">move</span>
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Princípios que guiam cada decisão da Sexando para oferecer a melhor experiência possível.
-              </p>
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+              {/* Texto à esquerda */}
+              <div className="text-center lg:text-left lg:sticky lg:top-24">
+                <h2 className="text-3xl md:text-4xl font-light tracking-tight mb-4">
+                  O que nos <span className="text-[hsl(330_100%_50%)]">move</span>
+                </h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto lg:mx-0">
+                  Princípios que guiam cada decisão da Sexando para oferecer a melhor experiência possível.
+                </p>
+              </div>
+
+              {/* Cards à direita */}
+              <ContainerScroll className="space-y-6">
+                {values.map((value, index) => {
+                  const Icon = value.icon;
+                  return (
+                    <CardSticky
+                      key={value.title}
+                      index={index}
+                      incrementY={24}
+                      className="top-24 rounded-2xl border border-border bg-white/70 backdrop-blur-xl shadow-lg p-8"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-[hsl(330_100%_50%)]/10 flex items-center justify-center mb-4">
+                        <Icon className="h-6 w-6 text-[hsl(330_100%_50%)]" />
+                      </div>
+                      <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed">{value.description}</p>
+                    </CardSticky>
+                  );
+                })}
+              </ContainerScroll>
             </div>
-            <ContainerScroll className="space-y-6">
-              {values.map((value, index) => {
-                const Icon = value.icon;
-                return (
-                  <CardSticky
-                    key={value.title}
-                    index={index}
-                    incrementY={24}
-                    className="top-24 rounded-2xl border border-border bg-white/70 backdrop-blur-xl shadow-lg p-8"
-                  >
-                    <div className="w-12 h-12 rounded-full bg-[hsl(330_100%_50%)]/10 flex items-center justify-center mb-4">
-                      <Icon className="h-6 w-6 text-[hsl(330_100%_50%)]" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{value.description}</p>
-                  </CardSticky>
-                );
-              })}
-            </ContainerScroll>
           </div>
         </section>
 
