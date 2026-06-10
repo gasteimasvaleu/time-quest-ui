@@ -83,7 +83,7 @@ const Navbar = () => {
               <AnimatedDownloadButton href="https://app.sexando.com/signup" label="Cadastrar" />
             </div>
             <div className="md:hidden">
-              <AnimatedDownloadButton href="#" label="Entrar" expandedWidth={150} />
+              <AnimatedDownloadButton href="https://app.sexando.com/signup" label="Entrar" expandedWidth={150} />
             </div>
 
             {/* Mobile Stacked Menu - right aligned */}
