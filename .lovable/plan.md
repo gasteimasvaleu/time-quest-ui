@@ -1,13 +1,30 @@
 ## Objetivo
-Expandir o parágrafo da seção "O que nos move" para ficar visualmente mais preenchido ao lado dos cards sticky no desktop, sem prejudicar a leitura no mobile.
+Adicionar separadores visuais entre as seções da página `/sobre` (`src/pages/Sobre.tsx`): linhas bem finas (1px) que desaparecem suavemente nas pontas (degradê transparente → cor → transparente).
 
-## Mudanças em `src/pages/Sobre.tsx` (~linha 90)
-- Substituir o parágrafo único por dois blocos de texto com responsividade:
-  - **Mobile (`lg:hidden`)**: manter o texto curto atual.
-  - **Desktop (`hidden lg:block`)**: exibir um texto mais longo e envolvente sobre os princípios da Sexando, com ~3-4 frases adicionais explicando a missão, a comunidade e o compromisso com privacidade.
-- Ajustar espaçamento inferior (`mb-6` ou `mb-8`) no bloco desktop para melhor alinhamento visual com o primeiro card.
+## Como fazer
+A página tem 3 seções dentro do `<main>`:
+1. Hero
+2. Mission ("Nossa missão é conectar...")
+3. Values ("O que nos move" + cards)
 
-## Detalhes técnicos
-- Usar classes utilitárias do Tailwind para alternância: `lg:hidden` / `hidden lg:block`.
-- Manter o tom de voz e terminologia da marca (comunidade, privacidade, Brasil, lifestyle liberal).
-- Nenhuma alteração na estrutura de grid ou nos cards sticky.
+Vou inserir um divisor entre Hero → Mission e entre Mission → Values.
+
+### Estrutura do separador
+Um elemento simples, centralizado e contido na largura `max-w-7xl`:
+
+```text
+[transparente] ———————————— linha 1px ———————————— [transparente]
+```
+
+Implementado com:
+```tsx
+<div className="max-w-7xl mx-auto px-4">
+  <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+</div>
+```
+
+Isso cria uma linha de 1px usando a cor `--border` do design system, com degradê para transparente nas duas pontas.
+
+## Resultado
+- Dois separadores finos com fade nas pontas separando as 3 seções.
+- Apenas mudança visual em `src/pages/Sobre.tsx`, sem alterar conteúdo nem lógica.
