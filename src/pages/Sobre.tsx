@@ -93,22 +93,19 @@ const Sobre = () => {
                 </p>
 
                 {/* Texto expandido no desktop */}
-                <div className="hidden lg:block space-y-4 text-muted-foreground max-w-xl mb-6">
-                  <p>
-                    Cada decisão que tomamos na Sexando parte de um propósito claro: criar o
-                    espaço mais seguro, moderno e acolhedor para quem vive ou deseja explorar
-                    o estilo de vida liberal no Brasil.
-                  </p>
-                  <p>
-                    Acreditamos que liberdade e respeito andam juntos. Por isso construímos uma
-                    comunidade onde perfis verificados, privacidade real e ausência de julgamentos
-                    são a base de tudo — do primeiro acesso ao seu próximo encontro.
-                  </p>
-                  <p>
-                    São esses princípios que guiam nosso trabalho diário e que tornam a Sexando
-                    diferente: tecnologia brasileira, discrição absoluta e uma experiência pensada
-                    nos mínimos detalhes para conectar pessoas reais com total confiança.
-                  </p>
+                <div className="hidden lg:block space-y-4 max-w-xl mb-6">
+                  <HyperTextParagraph
+                    text="Cada decisão que tomamos na Sexando parte de um propósito claro: criar o espaço mais seguro, moderno e acolhedor para quem vive ou deseja explorar o estilo de vida liberal no Brasil."
+                    highlightWords={["seguro", "moderno", "acolhedor", "liberal", "Brasil"]}
+                  />
+                  <HyperTextParagraph
+                    text="Acreditamos que liberdade e respeito andam juntos. Por isso construímos uma comunidade onde perfis verificados, privacidade real e ausência de julgamentos são a base de tudo — do primeiro acesso ao seu próximo encontro."
+                    highlightWords={["liberdade", "respeito", "comunidade", "verificados", "privacidade"]}
+                  />
+                  <HyperTextParagraph
+                    text="São esses princípios que guiam nosso trabalho diário e que tornam a Sexando diferente: tecnologia brasileira, discrição absoluta e uma experiência pensada nos mínimos detalhes para conectar pessoas reais com total confiança."
+                    highlightWords={["princípios", "brasileira", "discrição", "conectar", "confiança"]}
+                  />
                 </div>
               </div>
 
