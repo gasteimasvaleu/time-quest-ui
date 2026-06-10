@@ -37,7 +37,7 @@ const YoutubeImg = (
 const ICONS: DockIcon[] = [
   { icon: InstagramImg, label: "Instagram", href: "https://instagram.com/wediet.app" },
   { icon: WhatsAppImg, label: "WhatsApp", href: "https://wa.me/5583999187322" },
-  { icon: FacebookImg, label: "Facebook", href: "https://facebook.com/wediet.app" },
+  { icon: FacebookImg, label: "Facebook", href: "https://www.facebook.com/profile.php?id=61590681752833" },
   { icon: YoutubeImg, label: "YouTube", href: "https://youtube.com/@wediet" },
 ];
 
