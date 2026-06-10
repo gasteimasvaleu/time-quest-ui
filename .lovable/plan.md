@@ -1,13 +1,13 @@
 ## Objetivo
-Reorganizar a seção "O que nos move" em layout de duas colunas no desktop: **texto fixo à esquerda** e **cards sticky à direita**.
+Expandir o parágrafo da seção "O que nos move" para ficar visualmente mais preenchido ao lado dos cards sticky no desktop, sem prejudicar a leitura no mobile.
 
-## Mudanças em `src/pages/Sobre.tsx` (seção Values, ~linha 82)
-- Trocar o container de `max-w-3xl` para `max-w-7xl`.
-- Criar um grid de 2 colunas em desktop (`lg:grid-cols-2`), coluna única no mobile.
-- **Coluna esquerda**: o cabeçalho "O que nos move" + subtítulo, alinhado à esquerda no desktop (em vez de centralizado), usando `lg:sticky lg:top-24` para o texto acompanhar a rolagem enquanto os cards passam.
-- **Coluna direita**: o `ContainerScroll` com os `CardSticky` (mesmo efeito de empilhamento atual).
-- No mobile: empilha tudo verticalmente — texto centralizado em cima, cards abaixo (comportamento atual preservado).
+## Mudanças em `src/pages/Sobre.tsx` (~linha 90)
+- Substituir o parágrafo único por dois blocos de texto com responsividade:
+  - **Mobile (`lg:hidden`)**: manter o texto curto atual.
+  - **Desktop (`hidden lg:block`)**: exibir um texto mais longo e envolvente sobre os princípios da Sexando, com ~3-4 frases adicionais explicando a missão, a comunidade e o compromisso com privacidade.
+- Ajustar espaçamento inferior (`mb-6` ou `mb-8`) no bloco desktop para melhor alinhamento visual com o primeiro card.
 
 ## Detalhes técnicos
-- Texto esquerdo: `text-center lg:text-left` e `max-w-2xl mx-auto lg:mx-0`.
-- Cards mantêm `top-24` e `incrementY` para o stacking.
+- Usar classes utilitárias do Tailwind para alternância: `lg:hidden` / `hidden lg:block`.
+- Manter o tom de voz e terminologia da marca (comunidade, privacidade, Brasil, lifestyle liberal).
+- Nenhuma alteração na estrutura de grid ou nos cards sticky.

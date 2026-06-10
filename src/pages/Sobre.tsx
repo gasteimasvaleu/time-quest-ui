@@ -87,9 +87,29 @@ const Sobre = () => {
                 <h2 className="text-3xl md:text-4xl font-light tracking-tight mb-4">
                   O que nos <span className="text-[hsl(330_100%_50%)]">move</span>
                 </h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto lg:mx-0">
+                {/* Texto curto no mobile */}
+                <p className="text-muted-foreground max-w-2xl mx-auto lg:hidden">
                   Princípios que guiam cada decisão da Sexando para oferecer a melhor experiência possível.
                 </p>
+
+                {/* Texto expandido no desktop */}
+                <div className="hidden lg:block space-y-4 text-muted-foreground max-w-xl mb-6">
+                  <p>
+                    Cada decisão que tomamos na Sexando parte de um propósito claro: criar o
+                    espaço mais seguro, moderno e acolhedor para quem vive ou deseja explorar
+                    o estilo de vida liberal no Brasil.
+                  </p>
+                  <p>
+                    Acreditamos que liberdade e respeito andam juntos. Por isso construímos uma
+                    comunidade onde perfis verificados, privacidade real e ausência de julgamentos
+                    são a base de tudo — do primeiro acesso ao seu próximo encontro.
+                  </p>
+                  <p>
+                    São esses princípios que guiam nosso trabalho diário e que tornam a Sexando
+                    diferente: tecnologia brasileira, discrição absoluta e uma experiência pensada
+                    nos mínimos detalhes para conectar pessoas reais com total confiança.
+                  </p>
+                </div>
               </div>
 
               {/* Cards à direita */}
