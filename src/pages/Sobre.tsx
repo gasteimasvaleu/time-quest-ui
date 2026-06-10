@@ -133,25 +133,6 @@ const Sobre = () => {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="max-w-7xl mx-auto px-4 py-16 md:py-24">
-          <div className="rounded-3xl bg-gradient-to-br from-[hsl(330_100%_50%)] to-[hsl(330_100%_40%)] p-8 md:p-16 text-center text-white">
-            <h2 className="text-3xl md:text-4xl font-light tracking-tight mb-4">
-              Pronto para fazer parte?
-            </h2>
-            <p className="text-white/80 max-w-xl mx-auto mb-8">
-              Junte-se a milhares de brasileiros que já descobriram uma nova forma de se conectar. 
-              Cadastre-se grátis e comece a explorar agora mesmo.
-            </p>
-            <a
-              href="https://app.sexando.com/signup"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-[hsl(330_100%_50%)] font-semibold transition-transform hover:scale-105 shadow-lg"
-            >
-              <Heart className="h-5 w-5" />
-              Criar conta grátis
-            </a>
-          </div>
-        </section>
       </main>
 
       <Footer />
