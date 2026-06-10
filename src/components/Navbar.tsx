@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { type CSSProperties } from "react";
-import { Home, Sparkles, Tag, HelpCircle, Search, type LucideIcon } from "lucide-react";
+import { Home, Sparkles, Tag, HelpCircle, Search, Info, type LucideIcon } from "lucide-react";
 import { MenuContainer, MenuItem } from "@/components/ui/stacked-menu";
 import AnimatedDownloadButton from "@/components/ui/animated-download-button";
 
