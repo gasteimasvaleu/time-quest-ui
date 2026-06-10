@@ -44,12 +44,8 @@ const Sobre = () => {
         {/* Hero */}
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 bg-[hsl(330_100%_50%)]/5" />
-          <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 relative">
+          <div className="max-w-7xl mx-auto px-4 py-10 md:py-16 relative">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 rounded-full bg-[hsl(330_100%_50%)]/10 px-4 py-1.5 text-sm font-medium text-[hsl(330_100%_50%)] mb-6">
-                <Heart className="h-4 w-4" />
-                <span>Sobre a Sexando</span>
-              </div>
               <h1 className="text-4xl md:text-6xl font-light tracking-tight mb-6">
                 A rede social brasileira do{" "}
                 <span className="text-[hsl(330_100%_50%)]">estilo de vida liberal</span>
