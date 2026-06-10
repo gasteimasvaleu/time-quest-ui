@@ -19,6 +19,7 @@ const menuItems: MenuItemDef[] = [
   { title: "Preços", to: "/precos", icon: Tag, from: "#FF9966", to2: "#FF5E62" },
   { title: "Dúvidas", to: "/contato", icon: HelpCircle, from: "#ffa9c6", to2: "#f434e2" },
   { title: "Buscar", to: "/search", icon: Search, from: "hsl(var(--accent-purple))", to2: "hsl(var(--primary))" },
+  { title: "Sobre", to: "/sobre", icon: Info, from: "#a8edea", to2: "#fed6e3" },
 ];
 
 const Navbar = () => {
