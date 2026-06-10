@@ -60,31 +60,20 @@ const Sobre = () => {
 
         {/* Mission */}
         <section className="max-w-7xl mx-auto px-4 py-12 md:py-20">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-3xl md:text-4xl font-light tracking-tight">
-                Nossa missão é <span className="text-[hsl(330_100%_50%)]">conectar</span> pessoas reais
-              </h2>
-              <p className="text-muted-foreground leading-relaxed">
-                Acreditamos que todos merecem um espaço seguro para explorar suas conexões. 
-                A Sexando foi criada para remover o tabu e oferecer uma experiência moderna, 
-                discreta e 100% brasileira para quem vive ou quer conhecer o universo liberal.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Com perfis verificados, privacidade garantida e uma comunidade ativa em todo o Brasil, 
-                facilitamos encontros entre pessoas com os mesmos interesses — seja para uma noite, 
-                uma amizade ou algo mais.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="rounded-3xl overflow-hidden shadow-2xl border border-border">
-                <img
-                  src="https://jkdtqihgliygacjt.supabase.co/storage/v1/object/public/criativos/021780738425628e8ad6f8fac80a9b78040141fa10ae51dcb210c_0.jpeg"
-                  alt="Pessoas se conectando na Sexando"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            </div>
+          <div className="max-w-3xl mx-auto space-y-6 text-center">
+            <h2 className="text-3xl md:text-4xl font-light tracking-tight">
+              Nossa missão é <span className="text-[hsl(330_100%_50%)]">conectar</span> pessoas reais
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              Acreditamos que todos merecem um espaço seguro para explorar suas conexões. 
+              A Sexando foi criada para remover o tabu e oferecer uma experiência moderna, 
+              discreta e 100% brasileira para quem vive ou quer conhecer o universo liberal.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Com perfis verificados, privacidade garantida e uma comunidade ativa em todo o Brasil, 
+              facilitamos encontros entre pessoas com os mesmos interesses — seja para uma noite, 
+              uma amizade ou algo mais.
+            </p>
           </div>
         </section>
 
