@@ -97,6 +97,13 @@ const features = [
       "Home com carrosséis de continuar assistindo, novidades, top ranked e assistir mais tarde. Player completo com curtidas, comentários, download, compartilhamento e progresso salvo. Upload nativo de vídeos ou importação por URL com miniaturas desktop/mobile, título, descrição e categoria. Busca inteligente e preview ao passar o mouse. Splash screen cinemática com animação em vídeo antes do acesso.",
     src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/0217811289066410f20bbdfc8ca54d9bbb0533a8546905c8873c9_0.jpeg",
   },
+  {
+    name: "Tokens",
+    designation: "🪙 Carteira, gorjetas e destaques",
+    quote:
+      "Sistema de tokens com saldo disponível e bloqueado, histórico completo de transações e estatísticas lifetime. Compra via Pix com QR Code e crédito instantâneo. Envie gorjetas em posts, lives e perfis. Destaque posts, fotos, vídeos e perfis para mais visibilidade com durações de 24h a 72h.",
+    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/021781128920242f39d09b715cb307c823cd4ff1a5ec1ab47bf0b_0.jpeg",
+  },
 ];
 
 const Funcionalidades = () => {
