@@ -51,10 +51,11 @@ const Sobre = () => {
                 A rede social brasileira do{" "}
                 <span className="text-[hsl(330_100%_50%)]">estilo de vida liberal</span>
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                Sexando é a plataforma que conecta casais, solteiros e solteiras em um ambiente seguro, 
-                verificado e sem tabus. Explore, conecte e viva suas experiências com total liberdade e privacidade.
-              </p>
+              <HyperTextParagraph
+                text="Sexando é a plataforma que conecta casais, solteiros e solteiras em um ambiente seguro, verificado e sem tabus. Explore, conecte e viva suas experiências com total liberdade e privacidade."
+                highlightWords={["conecta", "seguro", "verificado", "liberdade", "privacidade"]}
+                className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto"
+              />
             </div>
           </div>
         </section>
