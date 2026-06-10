@@ -90,6 +90,13 @@ const features = [
       "Pagamentos via Mercado Pago (Pix e cartão) que desbloqueiam Hot or Not, Avatar IA, busca avançada, selo Premium e muito mais.",
     src: "https://jkdtqihgliygacjtakor.supabase.co/storage/v1/object/public/criativos/021780740561800b60c2cebbbed8b1cc7b57b46439bb32b547052_0.jpeg",
   },
+  {
+    name: "Streaming (Sexando Flix)",
+    designation: "📺 Conteúdo em vídeo estilo Netflix",
+    quote:
+      "Home com carrosséis de continuar assistindo, novidades, top ranked e assistir mais tarde. Player completo com curtidas, comentários, download, compartilhamento e progresso salvo. Upload nativo de vídeos ou importação por URL com miniaturas desktop/mobile, título, descrição e categoria. Busca inteligente e preview ao passar o mouse. Splash screen cinemática com animação em vídeo antes do acesso.",
+    src: "https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/0217811289066410f20bbdfc8ca54d9bbb0533a8546905c8873c9_0.jpeg",
+  },
 ];
 
 const Funcionalidades = () => {
