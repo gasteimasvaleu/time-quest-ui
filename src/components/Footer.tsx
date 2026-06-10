@@ -27,6 +27,9 @@ const Footer = () => {
                 <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">
                   Começar
                 </Link>
+                <Link to="/search" className="text-muted-foreground hover:text-primary transition-colors">
+                  Buscar
+                </Link>
                 <Link to="/funcionalidades" className="text-muted-foreground hover:text-primary transition-colors">
                   Funcionalidades
                 </Link>
