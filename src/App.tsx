@@ -12,6 +12,7 @@ import Obrigado from "./pages/Obrigado";
 import NotFound from "./pages/NotFound";
 import MobileApp from "./pages/MobileApp";
 import Search from "./pages/Search";
+import Sobre from "./pages/Sobre";
 import FloatingDock from "./components/FloatingDock";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/funcionalidades" element={<Funcionalidades />} />
           <Route path="/precos" element={<Precos />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/sobre" element={<Sobre />} />
           <Route path="/obrigado" element={<Obrigado />} />
           <Route path="/mobileapp" element={<MobileApp />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

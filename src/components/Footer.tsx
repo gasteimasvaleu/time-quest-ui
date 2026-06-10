@@ -39,6 +39,9 @@ const Footer = () => {
                 <Link to="/contato" className="text-muted-foreground hover:text-primary transition-colors">
                   Dúvidas
                 </Link>
+                <Link to="/sobre" className="text-muted-foreground hover:text-primary transition-colors">
+                  Sobre
+                </Link>
               </nav>
             </div>
 
