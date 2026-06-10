@@ -1,0 +1,152 @@
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { Heart, Shield, Users, MapPin, MessageCircle, Sparkles } from "lucide-react";
+
+const values = [
+  {
+    icon: Users,
+    title: "Comunidade Real",
+    description: "Conectamos casais, solteiros e solteiras que compartilham o mesmo estilo de vida liberal. Perfis verificados e ambiente sem julgamentos."
+  },
+  {
+    icon: Shield,
+    title: "Privacidade Total",
+    description: "Seus dados e fotos são protegidos. Você controla o que mostra e para quem. Discrição é nossa prioridade desde o primeiro acesso."
+  },
+  {
+    icon: MapPin,
+    title: "Brasil Inteiro",
+    description: "De São Paulo a Fortaleza, nossa comunidade cresce em todas as regiões. Encontre pessoas e eventos perto de onde você mora ou viaja."
+  },
+  {
+    icon: MessageCircle,
+    title: "Conversas Sem Limites",
+    description: "Chat direto, sem burocracia. Conheça novas pessoas, marque encontros e construa conexões genuínas no seu ritmo."
+  },
+  {
+    icon: Sparkles,
+    title: "Experiência Premium",
+    description: "Desbloqueie mensagens ilimitadas, veja quem te visitou e tenha destaque na busca. Tudo para acelerar suas conexões."
+  },
+  {
+    icon: Heart,
+    title: "Feito com Cuidado",
+    description: "A Sexando nasceu da vontade de criar um espaço seguro, moderno e brasileiro para o universo liberal. Cada detalhe foi pensado para você."
+  }
+];
+
+const Sobre = () => {
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      <Navbar />
+
+      <main className="flex-1">
+        {/* Hero */}
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0 bg-[hsl(330_100%_50%)]/5" />
+          <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 relative">
+            <div className="max-w-3xl mx-auto text-center">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[hsl(330_100%_50%)]/10 px-4 py-1.5 text-sm font-medium text-[hsl(330_100%_50%)] mb-6">
+                <Heart className="h-4 w-4" />
+                <span>Sobre a Sexando</span>
+              </div>
+              <h1 className="text-4xl md:text-6xl font-light tracking-tight mb-6">
+                A rede social brasileira do{" "}
+                <span className="text-[hsl(330_100%_50%)]">estilo de vida liberal</span>
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                Sexando é a plataforma que conecta casais, solteiros e solteiras em um ambiente seguro, 
+                verificado e sem tabus. Explore, conecte e viva suas experiências com total liberdade e privacidade.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Mission */}
+        <section className="max-w-7xl mx-auto px-4 py-12 md:py-20">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <h2 className="text-3xl md:text-4xl font-light tracking-tight">
+                Nossa missão é <span className="text-[hsl(330_100%_50%)]">conectar</span> pessoas reais
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Acreditamos que todos merecem um espaço seguro para explorar suas conexões. 
+                A Sexando foi criada para remover o tabu e oferecer uma experiência moderna, 
+                discreta e 100% brasileira para quem vive ou quer conhecer o universo liberal.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Com perfis verificados, privacidade garantida e uma comunidade ativa em todo o Brasil, 
+                facilitamos encontros entre pessoas com os mesmos interesses — seja para uma noite, 
+                uma amizade ou algo mais.
+              </p>
+            </div>
+            <div className="relative">
+              <div className="rounded-3xl overflow-hidden shadow-2xl border border-border">
+                <img
+                  src="https://jkdtqihgliygacjt.supabase.co/storage/v1/object/public/criativos/021780738425628e8ad6f8fac80a9b78040141fa10ae51dcb210c_0.jpeg"
+                  alt="Pessoas se conectando na Sexando"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Values */}
+        <section className="bg-secondary/30 py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-light tracking-tight mb-4">
+                O que nos <span className="text-[hsl(330_100%_50%)]">move</span>
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Princípios que guiam cada decisão da Sexando para oferecer a melhor experiência possível.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {values.map((value) => {
+                const Icon = value.icon;
+                return (
+                  <div
+                    key={value.title}
+                    className="rounded-2xl border border-border bg-white/70 backdrop-blur-xl shadow-lg p-6 hover:shadow-xl transition-shadow"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-[hsl(330_100%_50%)]/10 flex items-center justify-center mb-4">
+                      <Icon className="h-6 w-6 text-[hsl(330_100%_50%)]" />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">{value.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{value.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="max-w-7xl mx-auto px-4 py-16 md:py-24">
+          <div className="rounded-3xl bg-gradient-to-br from-[hsl(330_100%_50%)] to-[hsl(330_100%_40%)] p-8 md:p-16 text-center text-white">
+            <h2 className="text-3xl md:text-4xl font-light tracking-tight mb-4">
+              Pronto para fazer parte?
+            </h2>
+            <p className="text-white/80 max-w-xl mx-auto mb-8">
+              Junte-se a milhares de brasileiros que já descobriram uma nova forma de se conectar. 
+              Cadastre-se grátis e comece a explorar agora mesmo.
+            </p>
+            <a
+              href="https://app.sexando.com/signup"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-[hsl(330_100%_50%)] font-semibold transition-transform hover:scale-105 shadow-lg"
+            >
+              <Heart className="h-5 w-5" />
+              Criar conta grátis
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Sobre;
