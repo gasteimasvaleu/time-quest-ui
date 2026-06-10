@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Heart, Shield, Users, MapPin, MessageCircle, Sparkles } from "lucide-react";
 import HyperTextParagraph from "@/components/HyperTextParagraph";
+import { ContainerScroll, CardSticky } from "@/components/ui/sticky-scroll-cards";
 
 const values = [
   {
