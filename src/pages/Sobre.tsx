@@ -61,6 +61,11 @@ const Sobre = () => {
           </div>
         </section>
 
+        {/* Separator */}
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+        </div>
+
         {/* Mission */}
         <section className="max-w-7xl mx-auto px-4 py-12 md:py-20">
           <div className="max-w-3xl mx-auto space-y-6 text-center">
@@ -77,6 +82,11 @@ const Sobre = () => {
             />
           </div>
         </section>
+
+        {/* Separator */}
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+        </div>
 
         {/* Values */}
         <section className="bg-secondary/30 py-16 md:py-24">
