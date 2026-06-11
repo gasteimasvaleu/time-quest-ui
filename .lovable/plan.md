@@ -1,13 +1,12 @@
 ## Plano
 
-1. Atualizar a lista de funcionalidades em `src/pages/Funcionalidades.tsx`.
-2. Adicionar um novo card chamado `Tokens`, com subtítulo `🪙 Carteira, gorjetas e destaques`.
-3. Usar a imagem fornecida no novo card.
-4. Inserir exatamente o texto descritivo informado sobre saldo, histórico, compra via Pix, gorjetas e destaques.
-5. Manter o mesmo componente e estilo atual (`CircularTestimonials`), sem alterar layout, navegação ou outros cards.
+Adicionar as 11 novas imagens ao marquee da home (`AnimatedMarqueeHero`), editando o array `NEW_IMAGES` em `src/pages/Index.tsx`.
+
+1. Incluir as 11 URLs fornecidas no array `NEW_IMAGES`.
+2. Decisão de escopo: substituir as imagens atuais pelas novas (recomendado, já que parecem ser novos criativos) — confirme se prefere **adicionar** às existentes em vez de substituir.
+3. Manter o padrão `MARQUEE_IMAGES = [...NEW_IMAGES, ...NEW_IMAGES]` para o loop contínuo.
 
 ## Detalhes técnicos
 
-- A alteração será apenas frontend.
-- O novo objeto será incluído no array `features`, seguindo o padrão dos cards existentes.
-- Nenhuma integração de pagamento ou backend será criada; será apenas conteúdo visual/descritivo na página.
+- Apenas alteração de conteúdo (URLs), sem mudança de layout ou lógica.
+- As URLs contêm espaços e parênteses (`result_00 (1).png`); serão usadas codificadas (`%20`, `%28`, `%29`) para carregar corretamente.
