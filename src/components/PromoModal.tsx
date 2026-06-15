@@ -40,6 +40,13 @@ const PromoModal = () => {
         />
 
         <div className="px-6 pb-6 pt-4">
+          <p className="mb-4 text-center text-sm font-medium text-foreground">
+            Os primeiros{" "}
+            <span className="font-bold text-[hsl(330,100%,50%)]">1.000 cadastros</span>{" "}
+            ganham assinatura{" "}
+            <span className="font-bold text-[hsl(330,100%,50%)]">Premium grátis</span>!
+          </p>
+
           <Button
             size="lg"
             onClick={handleCta}
