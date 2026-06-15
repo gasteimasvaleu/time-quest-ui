@@ -1,20 +1,20 @@
-Vou aplicar as melhorias de SEO da home e do site como um todo.
+## Problema
 
-## O que será feito
+O site está enviando dados de Analytics para o ID **`G-B63LHZS12D`**, mas a propriedade que você usa (a da captura de tela) é a **`G-0CBFM2NNWN`**. Por isso o painel mostra "A coleta de dados não está ativa": os hits chegam em outra propriedade.
 
-1. **`index.html`**
-   - Corrigir `lang="en"` → `lang="pt-BR"`.
-   - Adicionar `<link rel="canonical" href="https://sexando.com/" />`.
-   - Adicionar `<meta property="og:url" content="https://sexando.com/" />`.
-   - Adicionar JSON-LD do tipo `Organization` (nome, url, logo).
+## Correção
 
-2. **`public/sitemap.xml`** (novo, via gerador)
-   - Criar `scripts/generate-sitemap.ts` com `BASE_URL = https://sexando.com` listando as rotas públicas indexáveis (`/`, `/inicio`, `/mobileapp` e demais rotas reais do `src/App.tsx`, exceto 404/internas).
-   - Adicionar scripts `predev`/`prebuild` no `package.json` para gerar o sitemap automaticamente.
+No `index.html`, substituir o ID antigo pelo correto na tag gtag.js (linhas 14, 19):
 
-3. **`public/robots.txt`**
-   - Adicionar a diretiva `Sitemap: https://sexando.com/sitemap.xml` (mantendo os blocos existentes).
+```text
+src="...gtag/js?id=G-B63LHZS12D"   →   id=G-0CBFM2NNWN
+gtag('config', 'G-B63LHZS12D')     →   'G-0CBFM2NNWN'
+```
 
-## Observação sobre SEO por página
+O Google Tag Manager (`GTM-MX68QZ4F`) permanece como está, sem alterações.
 
-O `index.html` é estático e compartilhado por todas as rotas, então hoje todas usam o mesmo title/description. Se quiser title/description únicos por página (`/inicio`, `/mobileapp` etc.), posso instalar `react-helmet-async` num segundo passo. Por enquanto este plano foca nas correções sitewide acima — me avise se quer incluir o por-página também.
+## Detalhes técnicos
+
+- Apenas o `index.html` é alterado.
+- Também atualizarei a memória de Tracking IDs com o novo ID do GA4.
+- Após publicar, o Google pode levar até ~24-48h para reconhecer a coleta. Você pode confirmar mais rápido usando o "Tempo real" do GA4 após acessar o site publicado.
