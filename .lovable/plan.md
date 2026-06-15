@@ -1,9 +1,18 @@
-Atualizar o componente `src/components/PromoModal.tsx` para:
+## Objetivo
+Readicionar ao modal `PromoModal` o texto promocional que informa os usuários sobre a oferta dos primeiros 1000 cadastros com assinatura premium gratuita.
 
-1. Exibir a imagem fornecida (`https://lbwjszdpjkxbihdwjaqt.supabase.co/storage/v1/object/public/criativos/image_1781534343140_bab57d59.jpg`) no topo do modal, substituindo o bloco atual com ícone e texto de header.
-2. Substituir o conteúdo do body por um único botão com o texto **"Quero Conhecer"**, que ao clicar:
-   - Fecha o modal
-   - Marca como visto no `localStorage`
-   - Redireciona para a rota `/`
-3. Remover o botão secundário "Agora não, obrigado" e o texto promocional do body.
-4. Ajustar estilos para acomodar a imagem no topo de forma responsiva (ex: `object-cover`, altura definida, bordas arredondadas no topo).
+## Mudanças
+1. **Inserir texto promocional** entre a imagem e o botão "Quero Conhecer", mantendo o estilo visual atual do modal.
+
+### Texto a ser readicionado
+> "Os primeiros 1.000 cadastros ganham 1 ano de Premium grátis."
+
+Ou o texto exato original, se houver preferência por outra redação.
+
+2. **Manter** a imagem promocional e o botão de CTA inalterados.
+
+## Pergunta
+Qual é o texto exato que você quer que apareça no modal? É a frase:
+> "Os primeiros 1.000 cadastros ganham 1 ano de Premium grátis."
+
+Ou há uma redação específica que prefere usar?
