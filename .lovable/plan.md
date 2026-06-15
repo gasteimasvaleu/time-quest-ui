@@ -1,20 +1,17 @@
-## Problema
+# Atualizar container GTM do Sexando
 
-O site está enviando dados de Analytics para o ID **`G-B63LHZS12D`**, mas a propriedade que você usa (a da captura de tela) é a **`G-0CBFM2NNWN`**. Por isso o painel mostra "A coleta de dados não está ativa": os hits chegam em outra propriedade.
+Trocar o container GTM antigo (compartilhado com o outro site) pelo novo container exclusivo do Sexando: **GTM-5ZS2KN3M**.
 
-## Correção
+## Alterações em `index.html`
 
-No `index.html`, substituir o ID antigo pelo correto na tag gtag.js (linhas 14, 19):
+1. **No `<head>` (linha 10):** trocar `GTM-MX68QZ4F` por `GTM-5ZS2KN3M` no script do GTM.
+2. **No `<body>` (linha 58):** trocar `GTM-MX68QZ4F` por `GTM-5ZS2KN3M` no iframe noscript.
 
-```text
-src="...gtag/js?id=G-B63LHZS12D"   →   id=G-0CBFM2NNWN
-gtag('config', 'G-B63LHZS12D')     →   'G-0CBFM2NNWN'
-```
+## O que permanece igual
 
-O Google Tag Manager (`GTM-MX68QZ4F`) permanece como está, sem alterações.
+- O GA4 (`G-0CBFM2NNWN`) continua inalterado.
+- Eventos, conversões e tags são configurados por você dentro do painel do Google Tag Manager.
 
-## Detalhes técnicos
+## Observação
 
-- Apenas o `index.html` é alterado.
-- Também atualizarei a memória de Tracking IDs com o novo ID do GA4.
-- Após publicar, o Google pode levar até ~24-48h para reconhecer a coleta. Você pode confirmar mais rápido usando o "Tempo real" do GA4 após acessar o site publicado.
+Depois de publicar, o novo container começa a coletar dados do Sexando de forma isolada, sem misturar com o outro site.
