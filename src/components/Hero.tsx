@@ -45,14 +45,15 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row animate-fade-in-up">
-              <a href="https://app.sexando.com/signup">
-                <Button 
-                  size="lg" 
-                  className="bg-[hsl(330,100%,50%)] text-white hover:bg-[hsl(330,100%,45%)] hover:scale-105 transition-all shadow-lg border-2 border-[hsl(330,100%,50%)]"
-                >
-                  Criar Conta Grátis
-                </Button>
-              </a>
+              <Button
+                size="lg"
+                className="bg-[hsl(330,100%,50%)] text-white hover:bg-[hsl(330,100%,45%)] hover:scale-105 transition-all shadow-lg border-2 border-[hsl(330,100%,50%)]"
+                onClick={() => {
+                  (window as any).gtagSendEvent('https://app.sexando.com/signup');
+                }}
+              >
+                Criar Conta Grátis
+              </Button>
               <a href="https://app.sexando.com">
                 <Button 
                   size="lg" 
