@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import AffiliateNotice from "@/components/AffiliateNotice";
 import AnimatedMarqueeHero from "@/components/AnimatedMarqueeHero";
 import Footer from "@/components/Footer";
 import PromoModal from "@/components/PromoModal";
@@ -25,6 +26,7 @@ const Index = () => {
     <main>
       <PromoModal />
       <Navbar />
+      <AffiliateNotice />
       <Hero />
       <AnimatedMarqueeHero images={MARQUEE_IMAGES} />
 
