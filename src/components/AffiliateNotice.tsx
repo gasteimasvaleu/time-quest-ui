@@ -1,11 +1,19 @@
+import { DiaText } from "@/components/ui/dia-text-reveal";
+
 const AffiliateNotice = () => {
   return (
     <section className="bg-background px-4 pt-4 md:px-8 md:pt-10">
       <div className="mx-auto max-w-7xl">
         <div className="flex items-start gap-4 rounded-[40px] border border-border bg-white/70 backdrop-blur-xl shadow-lg px-6 py-5 md:px-10 md:py-6">
           <div>
-            <h2 className="text-base font-semibold text-foreground md:text-lg">
-              Já faz parte do programa de afiliados
+            <h2 className="text-base font-semibold md:text-lg">
+              <DiaText
+                text="Já faz parte do programa de afiliados"
+                textColor="hsl(var(--foreground))"
+                duration={1.6}
+                triggerOnView
+                once
+              />
             </h2>
             <p className="mt-1 text-sm text-muted-foreground md:text-base">
               Se você já se cadastrou, seu acesso ao programa de afiliados começa
