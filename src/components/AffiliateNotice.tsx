@@ -15,11 +15,15 @@ const AffiliateNotice = () => {
                 once
               />
             </h2>
-            <p className="mt-1 text-sm text-muted-foreground md:text-base">
-              Se você já se cadastrou, seu acesso ao programa de afiliados começa
-              automaticamente — sem burocracia e sem taxa de adesão. Convide amigos,
-              compartilhe seu link e receba comissão sempre que alguém criar uma conta
-              pelo seu convite.
+            <p className="mt-1 text-sm md:text-base">
+              <DiaText
+                text="Se você já se cadastrou, seu acesso ao programa de afiliados começa automaticamente — sem burocracia e sem taxa de adesão. Convide amigos, compartilhe seu link e receba comissão sempre que alguém criar uma conta pelo seu convite."
+                textColor="hsl(var(--muted-foreground))"
+                duration={1.8}
+                delay={0.5}
+                triggerOnView
+                once
+              />
             </p>
           </div>
         </div>
