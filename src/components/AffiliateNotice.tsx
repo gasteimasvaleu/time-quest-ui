@@ -1,0 +1,28 @@
+import { Gift } from "lucide-react";
+
+const AffiliateNotice = () => {
+  return (
+    <section className="bg-background px-4 pt-4 md:px-8 md:pt-10">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex items-start gap-4 rounded-[40px] border border-border bg-white/70 backdrop-blur-xl shadow-lg px-6 py-5 md:px-10 md:py-6">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/10">
+            <Gift className="h-5 w-5 text-accent" />
+          </div>
+          <div>
+            <h2 className="text-base font-semibold text-foreground md:text-lg">
+              Já faz parte do programa de afiliados
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground md:text-base">
+              Se você já se cadastrou, seu acesso ao programa de afiliados começa
+              automaticamente — sem burocracia e sem taxa de adesão. Convide amigos,
+              compartilhe seu link e receba comissão sempre que alguém criar uma conta
+              pelo seu convite.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default AffiliateNotice;
