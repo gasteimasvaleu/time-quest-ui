@@ -1,15 +1,19 @@
+# Trocar a imagem de compartilhamento (og:image)
+
 ## Objetivo
+Substituir a thumb exibida ao compartilhar o link do site no Instagram, WhatsApp e outras redes.
 
-Aplicar o efeito de revelação com gradiente (`DiaText`) também ao **parágrafo** do card de afiliados, não só ao título.
+## Passos
 
-## Implementação
+1. **Receber a imagem do usuário** (enviada no chat).
+2. **Preparar a imagem**: garantir proporção 1200×630 px (recortar/redimensionar se necessário) e tamanho abaixo de ~300 KB para o WhatsApp exibir o preview.
+3. **Hospedar a imagem** no projeto via Lovable Assets (CDN com URL pública absoluta).
+4. **Atualizar o `index.html`**:
+   - `<meta property="og:image">` → nova URL
+   - `<meta name="twitter:image">` → nova URL
+   - `logo` no JSON-LD (aponta para a mesma imagem antiga) → nova URL
+5. **Publicar**: a mudança só aparece no site ao vivo após o próximo publish.
 
-Atualizar `src/components/AffiliateNotice.tsx`:
-- Envolver o texto do parágrafo em `<DiaText>` (modo texto único, que permite quebra de linha normal), usando `textColor="hsl(var(--muted-foreground))"` para o corpo assentar na cor certa.
-- Adicionar um pequeno `delay` no parágrafo (ex.: `0.5s`) para o sweep começar logo após o do título, criando efeito em cascata.
-- Manter `triggerOnView` e `once`. Título continua com `textColor="hsl(var(--foreground))"`.
-
-## Detalhes técnicos
-
-- No modo de texto único o `DiaTextReveal` não força `white-space: nowrap`, então o parágrafo continua quebrando linha normalmente dentro do card.
-- Apenas apresentação/animação — sem mudança de conteúdo ou lógica.
+## Observações
+- WhatsApp/Instagram fazem cache da thumb: após publicar, forçar atualização no Facebook Sharing Debugger ("Scrape Again").
+- A imagem antiga (Google Storage) deixa de ser referenciada, mas não é apagada.
