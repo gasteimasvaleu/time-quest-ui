@@ -10,15 +10,6 @@
     })(window,document,'script','dataLayer','GTM-5ZS2KN3M');</script>
     <!-- End Google Tag Manager -->
     
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B63LHZS12D"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-B63LHZS12D');
-    </script>
-    <!-- End Google tag -->
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VNKZMC3EXB"></script>
@@ -34,14 +25,9 @@
     <!-- Google tag event - delayed navigation helper -->
     <script>
       function gtagSendEvent(url) {
-        var callback = function () {
-          if (typeof url === 'string') {
-            window.location = url;
-          }
-        };
-        gtag('event', 'page_view', {
-          'event_callback': callback,
-          'event_timeout': 2000
+        gtag('event', 'sign_up_click', {
+          event_callback: function () { window.location.href = url || 'https://app.sexando.com/signup'; },
+          event_timeout: 2000
         });
         return false;
       }
