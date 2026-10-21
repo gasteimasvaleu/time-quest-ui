@@ -27,11 +27,10 @@ const Index = () => {
     <main>
       <PromoModal />
       <Navbar />
-      <PartnerBanner />
       <AffiliateNotice />
       <Hero />
       <AnimatedMarqueeHero images={MARQUEE_IMAGES} />
-
+      <PartnerBanner />
       <Footer />
     </main>
   );
