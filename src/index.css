@@ -196,3 +196,15 @@ All colors MUST be HSL.
     box-shadow: var(--shadow-card);
   }
 }
+
+@layer components {
+  .prose-blog { @apply text-foreground leading-relaxed; }
+  .prose-blog h2 { @apply mt-10 mb-4 text-2xl font-semibold; }
+  .prose-blog h3 { @apply mt-8 mb-3 text-xl font-semibold; }
+  .prose-blog p { @apply my-4; }
+  .prose-blog ul { @apply my-4 list-disc pl-6 space-y-2; }
+  .prose-blog ol { @apply my-4 list-decimal pl-6 space-y-2; }
+  .prose-blog a { @apply text-accent underline; }
+  .prose-blog strong { @apply font-semibold; }
+  .prose-blog blockquote { @apply my-6 border-l-4 border-accent pl-4 italic text-muted-foreground; }
+}

@@ -13,6 +13,9 @@ import NotFound from "./pages/NotFound";
 import MobileApp from "./pages/MobileApp";
 import Search from "./pages/Search";
 import Sobre from "./pages/Sobre";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import Admin from "./pages/Admin";
 import FloatingDock from "./components/FloatingDock";
 
 const queryClient = new QueryClient();
@@ -31,6 +34,9 @@ const App = () => (
           <Route path="/precos" element={<Precos />} />
           <Route path="/search" element={<Search />} />
           <Route path="/sobre" element={<Sobre />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/adm" element={<Admin />} />
           <Route path="/obrigado" element={<Obrigado />} />
           <Route path="/mobileapp" element={<MobileApp />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
