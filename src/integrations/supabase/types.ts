@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      leads: {
+        Row: {
+          age: number
+          controle_alimentar: string | null
+          created_at: string
+          cuidado_alimentacao: string | null
+          dificuldade_alimentacao: string | null
+          email: string
+          id: string
+          interesse_app: string | null
+          name: string
+          objetivo_alimentacao: string | null
+          sex: string
+          source: string
+        }
+        Insert: {
+          age: number
+          controle_alimentar?: string | null
+          created_at?: string
+          cuidado_alimentacao?: string | null
+          dificuldade_alimentacao?: string | null
+          email: string
+          id?: string
+          interesse_app?: string | null
+          name: string
+          objetivo_alimentacao?: string | null
+          sex: string
+          source?: string
+        }
+        Update: {
+          age?: number
+          controle_alimentar?: string | null
+          created_at?: string
+          cuidado_alimentacao?: string | null
+          dificuldade_alimentacao?: string | null
+          email?: string
+          id?: string
+          interesse_app?: string | null
+          name?: string
+          objetivo_alimentacao?: string | null
+          sex?: string
+          source?: string
+        }
+        Relationships: []
+      }
       posts: {
         Row: {
           content: string
