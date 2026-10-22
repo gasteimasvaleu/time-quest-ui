@@ -6,7 +6,7 @@ interface GlassEffectProps {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
-  href?: string;
+  href?: string | undefined;
   target?: string;
 }
 
