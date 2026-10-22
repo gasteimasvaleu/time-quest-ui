@@ -15,6 +15,7 @@ const PromoModal = () => {
       const timer = setTimeout(() => setOpen(true), 800);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, []);
 
   const handleOpenChange = (next: boolean) => {

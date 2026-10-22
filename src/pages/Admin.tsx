@@ -60,22 +60,22 @@ const PostEditor = ({ draft, onSaved, onCancel }: { draft: Draft; onSaved: () =>
     const file = e.target.files?.[0];
     e.target.value = "";
     if (!file) return;
-    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) return toast.error("Use JPG, PNG ou WEBP");
-    if (file.size > 5 * 1024 * 1024) return toast.error("Imagem maior que 5 MB");
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) { toast.error("Use JPG, PNG ou WEBP"); return; }
+    if (file.size > 5 * 1024 * 1024) { toast.error("Imagem maior que 5 MB"); return; }
     setUploading(true);
     const ext = file.name.split(".").pop() || "jpg";
     const path = `${crypto.randomUUID()}.${ext}`;
     const { error } = await supabase.storage.from("blog-covers").upload(path, file, { contentType: file.type });
-    if (error) { setUploading(false); return toast.error("Falha ao enviar imagem"); }
+    if (error) { setUploading(false); { toast.error("Falha ao enviar imagem"); return; } }
     const { data: signed, error: sErr } = await supabase.storage.from("blog-covers").createSignedUrl(path, 60 * 60 * 24 * 365 * 10);
     setUploading(false);
-    if (sErr || !signed) return toast.error("Falha ao gerar link da imagem");
+    if (sErr || !signed) { toast.error("Falha ao gerar link da imagem"); return; }
     set("cover_url", signed.signedUrl);
     toast.success("Imagem enviada");
   };
 
   const save = async (status: Draft["status"]) => {
-    if (!d.title.trim()) return toast.error("Informe o título");
+    if (!d.title.trim()) { toast.error("Informe o título"); return; }
     setSaving(true);
     const row = { ...d, status, slug: slugify(d.slug || d.title), cover_url: d.cover_url || null };
     const { id, ...rest } = row;
@@ -83,7 +83,7 @@ const PostEditor = ({ draft, onSaved, onCancel }: { draft: Draft; onSaved: () =>
       ? await supabase.from("posts").update(rest).eq("id", id)
       : await supabase.from("posts").insert(rest);
     setSaving(false);
-    if (error) return toast.error(error.message.includes("duplicate") ? "Já existe um artigo com esse endereço" : error.message);
+    if (error) { toast.error(error.message.includes("duplicate") ? "Já existe um artigo com esse endereço" : error.message); return; }
     toast.success(status === "published" ? "Artigo publicado" : "Rascunho salvo");
     onSaved();
   };
@@ -173,7 +173,7 @@ const WriterTab = ({ onSend }: { onSend: (d: Draft) => void }) => {
   const [result, setResult] = useState<Draft | null>(null);
 
   const generate = async () => {
-    if (!topic.trim()) return toast.error("Informe o tema");
+    if (!topic.trim()) { toast.error("Informe o tema"); return; }
     setLoading(true);
     setResult(null);
     try {
