@@ -93,7 +93,7 @@ export const CircularTestimonials = ({
 
   const testimonialsLength = useMemo(() => testimonials.length, [testimonials]);
   const activeTestimonial = useMemo(
-    () => testimonials[activeIndex],
+    () => testimonials[activeIndex] ?? testimonials[0]!,
     [activeIndex, testimonials]
   );
 
