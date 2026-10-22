@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
 import ReactMarkdown from "react-markdown";
 import { toast } from "sonner";
@@ -51,8 +51,26 @@ const Login = () => {
 const PostEditor = ({ draft, onSaved, onCancel }: { draft: Draft; onSaved: () => void; onCancel: () => void }) => {
   const [d, setD] = useState<Draft>(draft);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
   useEffect(() => setD(draft), [draft]);
   const set = <K extends keyof Draft>(k: K, v: Draft[K]) => setD((p) => ({ ...p, [k]: v }));
+
+  const upload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) return toast.error("Use JPG, PNG ou WEBP");
+    if (file.size > 5 * 1024 * 1024) return toast.error("Imagem maior que 5 MB");
+    setUploading(true);
+    const ext = file.name.split(".").pop() || "jpg";
+    const path = `${crypto.randomUUID()}.${ext}`;
+    const { error } = await supabase.storage.from("blog-covers").upload(path, file, { contentType: file.type });
+    setUploading(false);
+    if (error) return toast.error("Falha ao enviar imagem");
+    set("cover_url", supabase.storage.from("blog-covers").getPublicUrl(path).data.publicUrl);
+    toast.success("Imagem enviada");
+  };
 
   const save = async (status: Draft["status"]) => {
     if (!d.title.trim()) return toast.error("Informe o título");
@@ -74,7 +92,19 @@ const PostEditor = ({ draft, onSaved, onCancel }: { draft: Draft; onSaved: () =>
         <div className="space-y-2"><Label>Título</Label><Input value={d.title} onChange={(e) => set("title", e.target.value)} /></div>
         <div className="space-y-2"><Label>Endereço (slug)</Label><Input value={d.slug} placeholder={slugify(d.title)} onChange={(e) => set("slug", e.target.value)} /></div>
         <div className="space-y-2"><Label>Título para o Google</Label><Input value={d.meta_title} onChange={(e) => set("meta_title", e.target.value)} /></div>
-        <div className="space-y-2"><Label>Imagem de capa (URL)</Label><Input value={d.cover_url ?? ""} onChange={(e) => set("cover_url", e.target.value)} /></div>
+        <div className="space-y-2">
+          <Label>Imagem de capa</Label>
+          <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp" hidden onChange={upload} />
+          {d.cover_url ? (
+            <div className="flex items-center gap-3">
+              <img src={d.cover_url} alt="Capa" className="h-16 w-28 rounded-lg object-cover" />
+              <Button type="button" size="sm" variant="outline" className="rounded-full" disabled={uploading} onClick={() => fileRef.current?.click()}>{uploading ? "Enviando…" : "Trocar"}</Button>
+              <Button type="button" size="sm" variant="ghost" className="rounded-full" onClick={() => set("cover_url", "")}>Remover</Button>
+            </div>
+          ) : (
+            <Button type="button" variant="outline" className="w-full rounded-full" disabled={uploading} onClick={() => fileRef.current?.click()}>{uploading ? "Enviando…" : "Enviar imagem"}</Button>
+          )}
+        </div>
       </div>
       <div className="space-y-2"><Label>Descrição para o Google</Label><Textarea rows={2} value={d.meta_description} onChange={(e) => set("meta_description", e.target.value)} /></div>
       <div className="space-y-2"><Label>Palavras-chave (separadas por vírgula)</Label><Input value={d.keywords.join(", ")} onChange={(e) => set("keywords", e.target.value.split(",").map((s) => s.trim()).filter(Boolean))} /></div>

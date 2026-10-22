@@ -15,6 +15,13 @@
       "when": 1792587409217,
       "tag": "0001_leads",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792664537702,
+      "tag": "0002_blog_covers_policies",
+      "breakpoints": true
     }
   ]
 }
