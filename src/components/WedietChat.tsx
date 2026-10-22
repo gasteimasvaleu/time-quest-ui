@@ -9,7 +9,7 @@ import { toast } from "sonner";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/wediet-chat`;
+const CHAT_URL = "/api/wediet-chat";
 const EXAMPLE_QUESTIONS = [
   "Quais são os planos do Wediet?",
   "Como funciona o FoodScan?",

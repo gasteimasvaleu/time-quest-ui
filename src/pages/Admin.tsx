@@ -178,7 +178,7 @@ const WriterTab = ({ onSend }: { onSend: (d: Draft) => void }) => {
     setResult(null);
     try {
       const { data: s } = await supabase.auth.getSession();
-      const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/blog-writer`, {
+      const res = await fetch("/api/blog-writer", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "@/lib/router-compat";
 import { type CSSProperties } from "react";
 import { Home, Sparkles, Tag, HelpCircle, Search, Info, BookOpen, type LucideIcon } from "lucide-react";
 import { MenuContainer, MenuItem } from "@/components/ui/stacked-menu";

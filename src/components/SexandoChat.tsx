@@ -9,7 +9,7 @@ import { toast } from "sonner";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/sexando-chat`;
+const CHAT_URL = "/api/sexando-chat";
 const EXAMPLE_QUESTIONS = [
   "O Sexando é gratuito?",
   "O que o Premium libera?",

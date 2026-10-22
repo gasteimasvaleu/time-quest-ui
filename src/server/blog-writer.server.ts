@@ -23,7 +23,7 @@ export async function handle(req: Request): Promise<Response> {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   try {
     const auth = req.headers.get("Authorization") ?? "";
-    const supabase = createClient(process.env["SUPABASE_URL"]!, process.env["SUPABASE_ANON_KEY"]!, {
+    const supabase = createClient((process.env["SUPABASE_URL"] ?? import.meta.env.VITE_SUPABASE_URL), (process.env["SUPABASE_ANON_KEY"] ?? process.env["SUPABASE_PUBLISHABLE_KEY"] ?? import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY), {
       global: { headers: { Authorization: auth } },
     });
     const { data: userData } = await supabase.auth.getUser(auth.replace("Bearer ", ""));
