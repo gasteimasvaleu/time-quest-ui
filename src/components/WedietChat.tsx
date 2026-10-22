@@ -185,7 +185,7 @@ export default function WedietChat() {
           placeholder="Faça uma pergunta sobre o Wediet..."
           className={cn(
             "w-full px-4 py-3 resize-none bg-transparent border-none text-foreground text-base md:text-sm",
-            "focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0",
+            "focus:outline-hidden focus-visible:ring-0 focus-visible:ring-offset-0",
             "placeholder:text-muted-foreground placeholder:text-base md:placeholder:text-sm min-h-[60px]",
           )}
           style={{ overflow: "hidden" }}
@@ -215,7 +215,7 @@ export default function WedietChat() {
               key={question}
               type="button"
               onClick={() => handleExampleClick(question)}
-              className="rounded-full border border-border bg-background/80 px-3 py-1.5 text-xs text-muted-foreground shadow-sm backdrop-blur-xl transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="rounded-full border border-border bg-background/80 px-3 py-1.5 text-xs text-muted-foreground shadow-sm backdrop-blur-xl transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               {question}
             </button>

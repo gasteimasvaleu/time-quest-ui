@@ -102,7 +102,7 @@ export const SquishyPricing = () => {
               href={FREE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-auto block rounded-lg border-2 border-white bg-white py-2.5 text-center font-mono font-black uppercase text-neutral-800 backdrop-blur-sm transition-all duration-200 hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50"
+              className="mt-auto block rounded-lg border-2 border-white bg-white py-2.5 text-center font-mono font-black uppercase text-neutral-800 backdrop-blur-sm transition-all duration-200 hover:bg-white/10 hover:text-white focus:outline-hidden focus:ring-2 focus:ring-white/50"
             >
               Começar grátis
             </a>
@@ -181,7 +181,7 @@ export const SquishyPricing = () => {
                 href={plan.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-auto block rounded-lg border-2 border-white bg-white py-2.5 text-center font-mono font-black uppercase text-primary backdrop-blur-sm transition-all duration-200 hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50"
+                className="mt-auto block rounded-lg border-2 border-white bg-white py-2.5 text-center font-mono font-black uppercase text-primary backdrop-blur-sm transition-all duration-200 hover:bg-white/10 hover:text-white focus:outline-hidden focus:ring-2 focus:ring-white/50"
               >
                 Assinar Premium
               </a>
