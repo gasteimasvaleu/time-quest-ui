@@ -121,7 +121,7 @@ function toCandidates(elements: OverpassElement[]) {
 
   for (const element of elements) {
     const tags = element.tags ?? {};
-    const name = tags.name?.trim();
+    const name = tags["name"]?.trim();
     if (!name) continue;
 
     const address = buildAddress(tags);
@@ -133,10 +133,10 @@ function toCandidates(elements: OverpassElement[]) {
     const lon = element.lon ?? element.center?.lon;
     candidates.push({
       name,
-      category: tags.amenity ?? tags.leisure ?? tags.club ?? tags.tourism ?? "local",
+      category: tags["amenity"] ?? tags["leisure"] ?? tags["club"] ?? tags["tourism"] ?? "local",
       address,
-      website: tags.website ?? tags["contact:website"],
-      phone: tags.phone ?? tags["contact:phone"],
+      website: tags["website"] ?? tags["contact:website"],
+      phone: tags["phone"] ?? tags["contact:phone"],
       lat,
       lon,
       source: "OpenStreetMap",
