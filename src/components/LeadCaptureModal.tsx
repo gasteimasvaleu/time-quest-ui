@@ -114,6 +114,7 @@ const LeadCaptureModal = ({ open, onOpenChange }: LeadCaptureModalProps) => {
             9: 'interesse_app',
           };
           const field = fieldMap[step];
+          if (!field) return false;
           if (!formData[field]) {
             setErrors({ [field]: "Por favor, selecione uma opção" });
             return false;

@@ -9,8 +9,8 @@ const BodySchema = z.object({
 type OverpassElement = {
   type: "node" | "way" | "relation";
   id: number;
-  lat?: number;
-  lon?: number;
+  lat?: number | undefined;
+  lon?: number | undefined;
   center?: { lat?: number; lon?: number };
   tags?: Record<string, string>;
 };
@@ -19,10 +19,10 @@ type Candidate = {
   name: string;
   category: string;
   address: string;
-  website?: string;
-  phone?: string;
-  lat?: number;
-  lon?: number;
+  website?: string | undefined;
+  phone?: string | undefined;
+  lat?: number | undefined;
+  lon?: number | undefined;
   sourceUrl: string;
   source: string;
 };

@@ -11,10 +11,10 @@ type SearchResult = {
   name: string;
   category: string;
   address?: string;
-  website?: string;
-  phone?: string;
-  lat?: number;
-  lon?: number;
+  website?: string | undefined;
+  phone?: string | undefined;
+  lat?: number | undefined;
+  lon?: number | undefined;
   source: string;
   sourceUrl: string;
   whyMatched: string;
@@ -88,8 +88,8 @@ const searchPublicData = async (city: string, state: string): Promise<SearchResp
     place_id: number;
     osm_type?: string;
     osm_id?: number;
-    lat?: string;
-    lon?: string;
+    lat?: string | undefined;
+    lon?: string | undefined;
     name?: string;
     display_name?: string;
     class?: string;
