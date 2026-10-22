@@ -18,11 +18,14 @@ import { Route as MobileappRouteImport } from './routes/mobileapp'
 import { Route as ObrigadoRouteImport } from './routes/obrigado'
 import { Route as PrecosRouteImport } from './routes/precos'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as ApiBlogWriterRouteImport } from './routes/api/blog-writer'
 import { Route as ApiSearchVenuesRouteImport } from './routes/api/search-venues'
 import { Route as ApiSexandoChatRouteImport } from './routes/api/sexando-chat'
 import { Route as ApiWedietChatRouteImport } from './routes/api/wediet-chat'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -69,6 +72,11 @@ const SearchRoute = SearchRouteImport.update({
   path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
   path: '/sobre',
@@ -94,6 +102,16 @@ const ApiWedietChatRoute = ApiWedietChatRouteImport.update({
   path: '/api/wediet-chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -105,11 +123,14 @@ export interface FileRoutesByFullPath {
   '/obrigado': typeof ObrigadoRoute
   '/precos': typeof PrecosRoute
   '/search': typeof SearchRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/api/blog-writer': typeof ApiBlogWriterRoute
   '/api/search-venues': typeof ApiSearchVenuesRoute
   '/api/sexando-chat': typeof ApiSexandoChatRoute
   '/api/wediet-chat': typeof ApiWedietChatRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -121,11 +142,14 @@ export interface FileRoutesByTo {
   '/obrigado': typeof ObrigadoRoute
   '/precos': typeof PrecosRoute
   '/search': typeof SearchRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/api/blog-writer': typeof ApiBlogWriterRoute
   '/api/search-venues': typeof ApiSearchVenuesRoute
   '/api/sexando-chat': typeof ApiSexandoChatRoute
   '/api/wediet-chat': typeof ApiWedietChatRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -138,11 +162,14 @@ export interface FileRoutesById {
   '/obrigado': typeof ObrigadoRoute
   '/precos': typeof PrecosRoute
   '/search': typeof SearchRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sobre': typeof SobreRoute
   '/api/blog-writer': typeof ApiBlogWriterRoute
   '/api/search-venues': typeof ApiSearchVenuesRoute
   '/api/sexando-chat': typeof ApiSexandoChatRoute
   '/api/wediet-chat': typeof ApiWedietChatRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -156,11 +183,14 @@ export interface FileRouteTypes {
     | '/obrigado'
     | '/precos'
     | '/search'
+    | '/sitemap.xml'
     | '/sobre'
     | '/api/blog-writer'
     | '/api/search-venues'
     | '/api/sexando-chat'
     | '/api/wediet-chat'
+    | '/blog/$slug'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -172,11 +202,14 @@ export interface FileRouteTypes {
     | '/obrigado'
     | '/precos'
     | '/search'
+    | '/sitemap.xml'
     | '/sobre'
     | '/api/blog-writer'
     | '/api/search-venues'
     | '/api/sexando-chat'
     | '/api/wediet-chat'
+    | '/blog/$slug'
+    | '/blog'
   id:
     | '__root__'
     | '/'
@@ -188,11 +221,14 @@ export interface FileRouteTypes {
     | '/obrigado'
     | '/precos'
     | '/search'
+    | '/sitemap.xml'
     | '/sobre'
     | '/api/blog-writer'
     | '/api/search-venues'
     | '/api/sexando-chat'
     | '/api/wediet-chat'
+    | '/blog/$slug'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -205,11 +241,14 @@ export interface RootRouteChildren {
   ObrigadoRoute: typeof ObrigadoRoute
   PrecosRoute: typeof PrecosRoute
   SearchRoute: typeof SearchRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SobreRoute: typeof SobreRoute
   ApiBlogWriterRoute: typeof ApiBlogWriterRoute
   ApiSearchVenuesRoute: typeof ApiSearchVenuesRoute
   ApiSexandoChatRoute: typeof ApiSexandoChatRoute
   ApiWedietChatRoute: typeof ApiWedietChatRoute
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -277,6 +316,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sobre': {
       id: '/sobre'
       path: '/sobre'
@@ -312,6 +358,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiWedietChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -325,11 +385,14 @@ const rootRouteChildren: RootRouteChildren = {
   ObrigadoRoute: ObrigadoRoute,
   PrecosRoute: PrecosRoute,
   SearchRoute: SearchRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SobreRoute: SobreRoute,
   ApiBlogWriterRoute: ApiBlogWriterRoute,
   ApiSearchVenuesRoute: ApiSearchVenuesRoute,
   ApiSexandoChatRoute: ApiSexandoChatRoute,
   ApiWedietChatRoute: ApiWedietChatRoute,
+  BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
