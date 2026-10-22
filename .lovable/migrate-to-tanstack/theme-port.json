@@ -1,0 +1,20 @@
+{
+  "customizations": [
+    { "token": "--accent-purple (bg-accent/text-accent)", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "--hero-container (bg-hero-container)", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "--badge-bg / --badge-text", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "brand HSL palette (:root/.dark)", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "--radius 1rem + xl/2xl/3xl radii", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "font-sans Inter", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "animate-marquee", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "animate-pink-pulse", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "animate-float", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "animate-ring-ripple", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "animate-fade-in-up", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "animate-float-delayed", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "animate-slide-in", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "shadow-card", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "container (centered, 2rem, 1400px)", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": ".prose-blog styles", "source": "src/index.css", "reappliedIn": "src/styles.css" }
+  ]
+}

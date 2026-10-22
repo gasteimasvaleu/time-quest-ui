@@ -341,7 +341,7 @@ const DiaTextReveal = forwardRef<HTMLSpanElement, DiaTextRevealProps>(
 
     return (
       <motion.span
-        animate={animatedW != null ? { width: animatedW } : undefined}
+        {...(animatedW != null ? { animate: { width: animatedW } } : {})}
         className={cn(
           componentThemeClassName,
           "align-bottom text-inherit leading-[100%]",

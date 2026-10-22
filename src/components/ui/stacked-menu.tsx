@@ -17,7 +17,7 @@ export function MenuItem({ onClick, disabled = false, icon, isActive = false, la
   return (
     <button
       type="button"
-      className={`relative w-11 h-11 rounded-full flex items-center justify-center transition-transform duration-200 outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40
+      className={`relative w-11 h-11 rounded-full flex items-center justify-center transition-transform duration-200 outline-hidden focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/40
         ${disabled ? "text-muted-foreground cursor-not-allowed" : ""}
         ${isActive ? "bg-primary text-primary-foreground" : "text-foreground hover:text-primary hover:scale-110"}
       `}
@@ -90,7 +90,7 @@ export function MenuContainer({ children }: MenuContainerProps) {
         onClick={() => setIsExpanded((v) => !v)}
         aria-label={isExpanded ? "Fechar menu" : "Abrir menu"}
         aria-expanded={isExpanded}
-        className={`relative w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-xl border shadow-md transition-colors outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40
+        className={`relative w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-xl border shadow-md transition-colors outline-hidden focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/40
           ${isExpanded ? "bg-primary text-primary-foreground border-primary/40" : "bg-white/70 text-foreground border-white/40 hover:bg-white/90"}
         `}
       >

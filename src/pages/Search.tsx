@@ -11,10 +11,10 @@ type SearchResult = {
   name: string;
   category: string;
   address?: string;
-  website?: string;
-  phone?: string;
-  lat?: number;
-  lon?: number;
+  website?: string | undefined;
+  phone?: string | undefined;
+  lat?: number | undefined;
+  lon?: number | undefined;
   source: string;
   sourceUrl: string;
   whyMatched: string;
@@ -29,7 +29,7 @@ type SearchResponse = {
   results: SearchResult[];
 };
 
-const SEARCH_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/search-venues`;
+const SEARCH_URL = "/api/search-venues";
 const CITY_SUGGESTIONS = ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Curitiba", "Porto Alegre", "Brasília"];
 
 const confidenceClass: Record<SearchResult["confidence"], string> = {
@@ -88,8 +88,8 @@ const searchPublicData = async (city: string, state: string): Promise<SearchResp
     place_id: number;
     osm_type?: string;
     osm_id?: number;
-    lat?: string;
-    lon?: string;
+    lat?: string | undefined;
+    lon?: string | undefined;
     name?: string;
     display_name?: string;
     class?: string;
@@ -101,7 +101,7 @@ const searchPublicData = async (city: string, state: string): Promise<SearchResp
   const seen = new Set<string>();
   const results = elements.flatMap((element): SearchResult[] => {
     const tags = element.extratags ?? {};
-    const name = (element.namedetails?.name ?? element.name ?? element.display_name?.split(",")?.[0])?.trim();
+    const name = (element.namedetails?.["name"] ?? element.name ?? element.display_name?.split(",")?.[0])?.trim();
     if (!name) return [];
     const address = element.display_name ?? buildAddress(tags);
     const key = `${name.toLowerCase()}-${address.toLowerCase()}`;
@@ -113,8 +113,8 @@ const searchPublicData = async (city: string, state: string): Promise<SearchResp
       name,
       category: element.type ?? element.class ?? "local",
       address,
-      website: tags.website ?? tags["contact:website"],
-      phone: tags.phone ?? tags["contact:phone"],
+      website: tags["website"] ?? tags["contact:website"],
+      phone: tags["phone"] ?? tags["contact:phone"],
       lat: element.lat ? Number(element.lat) : undefined,
       lon: element.lon ? Number(element.lon) : undefined,
       source: "OpenStreetMap",
@@ -231,7 +231,7 @@ const Search = () => {
                     key={suggestion}
                     type="button"
                     onClick={() => chooseCity(suggestion)}
-                    className="rounded-full border border-border bg-background px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    className="rounded-full border border-border bg-background px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   >
                     {suggestion}
                   </button>

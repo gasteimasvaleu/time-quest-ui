@@ -114,6 +114,7 @@ const LeadCaptureModal = ({ open, onOpenChange }: LeadCaptureModalProps) => {
             9: 'interesse_app',
           };
           const field = fieldMap[step];
+          if (!field) return false;
           if (!formData[field]) {
             setErrors({ [field]: "Por favor, selecione uma opção" });
             return false;
@@ -257,8 +258,8 @@ const LeadCaptureModal = ({ open, onOpenChange }: LeadCaptureModalProps) => {
                   className="text-lg py-6"
                   autoFocus
                 />
-                {errors.name && (
-                  <p className="text-sm text-destructive mt-2">{errors.name}</p>
+                {errors["name"] && (
+                  <p className="text-sm text-destructive mt-2">{errors["name"]}</p>
                 )}
               </div>
             </div>
@@ -308,8 +309,8 @@ const LeadCaptureModal = ({ open, onOpenChange }: LeadCaptureModalProps) => {
                   );
                 })}
               </RadioGroup>
-              {errors.sex && (
-                <p className="text-sm text-destructive mt-2">{errors.sex}</p>
+              {errors["sex"] && (
+                <p className="text-sm text-destructive mt-2">{errors["sex"]}</p>
               )}
             </div>
           )}
@@ -331,8 +332,8 @@ const LeadCaptureModal = ({ open, onOpenChange }: LeadCaptureModalProps) => {
                   max="100"
                   autoFocus
                 />
-                {errors.age && (
-                  <p className="text-sm text-destructive mt-2">{errors.age}</p>
+                {errors["age"] && (
+                  <p className="text-sm text-destructive mt-2">{errors["age"]}</p>
                 )}
               </div>
             </div>
@@ -353,8 +354,8 @@ const LeadCaptureModal = ({ open, onOpenChange }: LeadCaptureModalProps) => {
                   className="text-lg py-6"
                   autoFocus
                 />
-                {errors.email && (
-                  <p className="text-sm text-destructive mt-2">{errors.email}</p>
+                {errors["email"] && (
+                  <p className="text-sm text-destructive mt-2">{errors["email"]}</p>
                 )}
               </div>
             </div>
@@ -407,8 +408,8 @@ const LeadCaptureModal = ({ open, onOpenChange }: LeadCaptureModalProps) => {
                    );
                  })}
                </RadioGroup>
-               {errors.cuidado_alimentacao && (
-                 <p className="text-sm text-destructive mt-2">{errors.cuidado_alimentacao}</p>
+               {errors["cuidado_alimentacao"] && (
+                 <p className="text-sm text-destructive mt-2">{errors["cuidado_alimentacao"]}</p>
                )}
              </div>
            )}
@@ -458,8 +459,8 @@ const LeadCaptureModal = ({ open, onOpenChange }: LeadCaptureModalProps) => {
                    );
                  })}
                </RadioGroup>
-               {errors.controle_alimentar && (
-                 <p className="text-sm text-destructive mt-2">{errors.controle_alimentar}</p>
+               {errors["controle_alimentar"] && (
+                 <p className="text-sm text-destructive mt-2">{errors["controle_alimentar"]}</p>
                )}
              </div>
            )}
@@ -509,8 +510,8 @@ const LeadCaptureModal = ({ open, onOpenChange }: LeadCaptureModalProps) => {
                    );
                  })}
                </RadioGroup>
-               {errors.objetivo_alimentacao && (
-                 <p className="text-sm text-destructive mt-2">{errors.objetivo_alimentacao}</p>
+               {errors["objetivo_alimentacao"] && (
+                 <p className="text-sm text-destructive mt-2">{errors["objetivo_alimentacao"]}</p>
                )}
              </div>
            )}
@@ -560,8 +561,8 @@ const LeadCaptureModal = ({ open, onOpenChange }: LeadCaptureModalProps) => {
                    );
                  })}
                </RadioGroup>
-               {errors.dificuldade_alimentacao && (
-                 <p className="text-sm text-destructive mt-2">{errors.dificuldade_alimentacao}</p>
+               {errors["dificuldade_alimentacao"] && (
+                 <p className="text-sm text-destructive mt-2">{errors["dificuldade_alimentacao"]}</p>
                )}
              </div>
            )}
@@ -611,8 +612,8 @@ const LeadCaptureModal = ({ open, onOpenChange }: LeadCaptureModalProps) => {
                    );
                  })}
                </RadioGroup>
-               {errors.interesse_app && (
-                 <p className="text-sm text-destructive mt-2">{errors.interesse_app}</p>
+               {errors["interesse_app"] && (
+                 <p className="text-sm text-destructive mt-2">{errors["interesse_app"]}</p>
                )}
              </div>
            )}

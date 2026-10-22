@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { Heart, Mail, MapPin } from "lucide-react";
 import { FloatingDockAnchor } from "@/components/FloatingDock";
 

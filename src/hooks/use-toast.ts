@@ -39,7 +39,7 @@ type Action =
     }
   | {
       type: ActionType["DISMISS_TOAST"];
-      toastId?: ToasterToast["id"];
+      toastId?: ToasterToast["id"] | undefined;
     }
   | {
       type: ActionType["REMOVE_TOAST"];
@@ -179,7 +179,7 @@ function useToast() {
   return {
     ...state,
     toast,
-    dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }),
+    dismiss: (toastId?: string) => dispatch(toastId === undefined ? { type: "DISMISS_TOAST" } : { type: "DISMISS_TOAST", toastId }),
   };
 }
 
