@@ -76,7 +76,7 @@ export const CircularTestimonials = ({
   const getKeywordIndex = (quote: string): number => {
     const words = quote.split(" ");
     for (let i = 0; i < words.length; i++) {
-      const clean = words[i].toLowerCase().replace(/[^\p{L}]/gu, "");
+      const clean = (words[i] ?? "").toLowerCase().replace(/[^\p{L}]/gu, "");
       if (clean.length > 4 && !STOPWORDS_PT.has(clean)) return i;
     }
     return -1;

@@ -101,7 +101,7 @@ const searchPublicData = async (city: string, state: string): Promise<SearchResp
   const seen = new Set<string>();
   const results = elements.flatMap((element): SearchResult[] => {
     const tags = element.extratags ?? {};
-    const name = (element.namedetails?.name ?? element.name ?? element.display_name?.split(",")?.[0])?.trim();
+    const name = (element.namedetails?.["name"] ?? element.name ?? element.display_name?.split(",")?.[0])?.trim();
     if (!name) return [];
     const address = element.display_name ?? buildAddress(tags);
     const key = `${name.toLowerCase()}-${address.toLowerCase()}`;

@@ -74,7 +74,7 @@ const Typewriter = ({
           }, deleteSpeed);
         }
       } else {
-        if (currentIndex < currentText.length) {
+        if (currentText !== undefined && currentIndex < currentText.length) {
           timeout = setTimeout(() => {
             setDisplayText((prev) => prev + currentText[currentIndex]);
             setCurrentIndex((prev) => prev + 1);
@@ -115,7 +115,7 @@ const Typewriter = ({
           className={cn(
             cursorClassName,
             hideCursorOnType &&
-              (currentIndex < texts[currentTextIndex].length || isDeleting)
+              (currentIndex < (texts[currentTextIndex]?.length ?? 0) || isDeleting)
               ? "hidden"
               : ""
           )}
