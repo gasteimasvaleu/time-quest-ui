@@ -12,5 +12,6 @@ Allow: /
 
 User-agent: *
 Allow: /
+Disallow: /adm
 
 Sitemap: https://sexando.com/sitemap.xml
