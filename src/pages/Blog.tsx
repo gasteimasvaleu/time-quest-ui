@@ -1,23 +1,9 @@
-import { useEffect, useState } from "react";
 import { Link } from "@/lib/router-compat";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { supabase } from "@/integrations/supabase/client";
 import { formatDate, type Post } from "@/lib/blog";
 
-const Blog = () => {
-  const [posts, setPosts] = useState<Post[] | null>(null);
-
-  useEffect(() => {
-    document.title = "Blog | Sexando";
-    supabase
-      .from("posts")
-      .select("*")
-      .eq("status", "published")
-      .order("published_at", { ascending: false })
-      .then(({ data }) => setPosts((data as Post[]) ?? []));
-  }, []);
-
+const Blog = ({ posts }: { posts: Post[] }) => {
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
@@ -32,9 +18,7 @@ const Blog = () => {
             </p>
           </div>
 
-          {posts === null ? (
-            <p className="mt-12 text-center text-muted-foreground">Carregando…</p>
-          ) : posts.length === 0 ? (
+          {posts.length === 0 ? (
             <p className="mt-12 text-center text-muted-foreground">Nenhum artigo publicado ainda.</p>
           ) : (
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -42,7 +26,7 @@ const Blog = () => {
                 <Link
                   key={p.id}
                   to={`/blog/${p.slug}`}
-                  className="group overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-shadow hover:shadow-lg"
+                  className="group overflow-hidden rounded-3xl border border-border bg-card shadow-xs transition-shadow hover:shadow-lg"
                 >
                   {p.cover_url && (
                     <img src={p.cover_url} alt={p.title} loading="lazy" className="aspect-video w-full object-cover" />
