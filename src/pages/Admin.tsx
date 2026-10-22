@@ -66,9 +66,11 @@ const PostEditor = ({ draft, onSaved, onCancel }: { draft: Draft; onSaved: () =>
     const ext = file.name.split(".").pop() || "jpg";
     const path = `${crypto.randomUUID()}.${ext}`;
     const { error } = await supabase.storage.from("blog-covers").upload(path, file, { contentType: file.type });
+    if (error) { setUploading(false); return toast.error("Falha ao enviar imagem"); }
+    const { data: signed, error: sErr } = await supabase.storage.from("blog-covers").createSignedUrl(path, 60 * 60 * 24 * 365 * 10);
     setUploading(false);
-    if (error) return toast.error("Falha ao enviar imagem");
-    set("cover_url", supabase.storage.from("blog-covers").getPublicUrl(path).data.publicUrl);
+    if (sErr || !signed) return toast.error("Falha ao gerar link da imagem");
+    set("cover_url", signed.signedUrl);
     toast.success("Imagem enviada");
   };
 
