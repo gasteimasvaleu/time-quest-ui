@@ -128,7 +128,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
   const { pathname, search, hash } = parseTo(to);
   return (
     <TSLink
-      {...({ ...rest, ref, to: pathname, search, hash, replace, state, children } as object)}
+      {...({ ...rest, ref, to: pathname, search, hash, replace, state, children } as { to: string })}
     />
   );
 });
