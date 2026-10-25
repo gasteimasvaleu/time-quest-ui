@@ -45,7 +45,7 @@ const Sobre = () => {
       <main className="flex-1">
         {/* Hero */}
         <section className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-[hsl(330_100%_50%)]/5" />
+          <div className="absolute inset-0 bg-white" />
           <div className="max-w-7xl mx-auto px-4 py-10 md:py-16 relative">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-6xl font-light tracking-tight mb-6">
