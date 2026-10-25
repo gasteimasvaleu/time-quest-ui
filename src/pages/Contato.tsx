@@ -51,11 +51,11 @@ const Contato = () => {
               Para problemas com pagamento, conta ou denúncias, nosso time responde rapidinho.
             </p>
             <a
-              href="mailto:suporte@sexando.com"
+              href="mailto:sexandoapp@hotmail.com"
               className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-primary-foreground font-medium transition-transform hover:scale-105"
             >
               <Mail className="h-4 w-4" />
-              suporte@sexando.com
+              sexandoapp@hotmail.com
             </a>
           </div>
         </section>
