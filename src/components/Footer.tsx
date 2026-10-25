@@ -53,11 +53,11 @@ const Footer = () => {
               <h3 className="text-lg font-semibold mb-4">Contato</h3>
               <div className="flex flex-col gap-3">
                 <a 
-                  href="mailto:contato@sexando.com.br"
+                  href="mailto:sexandoapp@hotmail.com"
                   className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
                 >
                   <Mail className="h-4 w-4" />
-                  <span className="text-sm">contato@sexando.com.br</span>
+                  <span className="text-sm">sexandoapp@hotmail.com</span>
                 </a>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <MapPin className="h-4 w-4" />
