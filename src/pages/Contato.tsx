@@ -13,16 +13,16 @@ const Contato = () => {
           <div className="relative mx-auto mb-4 h-28 md:h-36 w-28 md:w-36">
             <span
               aria-hidden
-              className="pointer-events-none absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[hsl(330_100%_50%)] animate-ring-ripple"
+              className="pointer-events-none absolute left-1/2 top-1/2 h-full w-full rounded-full border-2 border-[hsl(330_100%_50%)] animate-ring-ripple"
             />
             <span
               aria-hidden
-              className="pointer-events-none absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[hsl(330_100%_50%)] animate-ring-ripple"
+              className="pointer-events-none absolute left-1/2 top-1/2 h-full w-full rounded-full border-2 border-[hsl(330_100%_50%)] animate-ring-ripple"
               style={{ animationDelay: "1s" }}
             />
             <span
               aria-hidden
-              className="pointer-events-none absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[hsl(330_100%_50%)] animate-ring-ripple"
+              className="pointer-events-none absolute left-1/2 top-1/2 h-full w-full rounded-full border-2 border-[hsl(330_100%_50%)] animate-ring-ripple"
               style={{ animationDelay: "2s" }}
             />
             <img
