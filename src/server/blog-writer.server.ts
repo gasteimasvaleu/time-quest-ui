@@ -38,7 +38,7 @@ export async function handle(req: Request): Promise<Response> {
     const words = Math.min(Math.max(Number(body?.words) || 1000, 300), 3000);
     if (!topic) return json({ error: "Informe o tema do artigo" }, 400);
 
-    const apiKey = process.env["LOVABLE_API_KEY"];
+    const apiKey = process.env["OPENAI_API_KEY"];
     if (!apiKey) return json({ error: "IA não configurada" }, 500);
 
     const prompt = `Escreva um artigo de blog em português do Brasil para o site Sexando (rede social brasileira do estilo de vida liberal, para adultos, com foco em respeito, consentimento, segurança e privacidade). Conteúdo informativo e elegante, sem linguagem explícita.
@@ -48,12 +48,12 @@ Público: ${audience || "adultos interessados no estilo de vida liberal"}
 Tamanho aproximado: ${words} palavras.
 Regras de SEO: palavra-chave no título, no primeiro parágrafo, em ao menos um subtítulo H2 e no meta description; meta_title até 60 caracteres; meta_description entre 140 e 160 caracteres; slug curto em minúsculas com hífens, sem acentos; 5 a 8 keywords; excerpt de 1-2 frases; content em Markdown com subtítulos ## e ###, listas quando útil, parágrafos curtos, uma seção de perguntas frequentes e uma conclusão com convite para conhecer a Sexando. Não repita o título como H1 no content.`;
 
-    const upstream = await fetch("https://ai.gateway.lovable.dev/v1/responses", {
+    const upstream = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
       signal: req.signal,
-      headers: { "Content-Type": "application/json", "Lovable-API-Key": apiKey, "X-Lovable-AIG-SDK": "fetch" },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
       body: JSON.stringify({
-        model: "openai/gpt-6-astra",
+        model: process.env["OPENAI_MODEL_BLOG"] || "gpt-6-astra",
         input: prompt,
         stream: true,
         store: false,
@@ -73,7 +73,6 @@ Regras de SEO: palavra-chave no título, no primeiro parágrafo, em ao menos um 
     }
 
     const headers = new Headers({ ...corsHeaders, "Content-Type": "text/event-stream" });
-    upstream.headers.forEach((v, k) => { if (k.toLowerCase().startsWith("x-lovable-aig-")) headers.set(k, v); });
     return new Response(upstream.body, { status: 200, headers });
   } catch (e) {
     if (req.signal.aborted) return new Response(null, { status: 499, headers: corsHeaders });

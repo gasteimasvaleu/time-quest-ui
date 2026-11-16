@@ -176,7 +176,7 @@ async function rankWithAi(city: string, placeLabel: string, candidates: Candidat
     };
   }
 
-  const key = process.env["LOVABLE_API_KEY"];
+  const key = process.env["OPENAI_API_KEY"];
   if (!key) return fallbackAi(city, candidates);
 
   const prompt = `Você organiza resultados de busca públicos para adultos +18. Use somente os candidatos fornecidos, não invente nomes, endereços, telefones nem links. Não escreva conteúdo sexual explícito.
@@ -195,11 +195,11 @@ Responda APENAS em JSON válido neste formato:
 {"summary":"texto","nextSteps":["passo1","passo2"],"items":[{"candidateIndex":0,"whyMatched":"motivo","confidence":"alta|média|baixa"}]}`;
 
   try {
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
-      headers: { "Content-Type": "application/json", "Lovable-API-Key": key },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
       body: JSON.stringify({
-        model: "google/gemini-2.5-flash",
+        model: process.env["OPENAI_MODEL_CHAT"] || "gpt-6-luna",
         messages: [{ role: "user", content: prompt }],
         response_format: { type: "json_object" },
       }),
